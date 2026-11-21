@@ -1,6 +1,9 @@
 # Generated configs
 /config/*.json.bak
 
+# Builds locaux (packs .mrpack generes)
+/dist/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -12,3 +15,7 @@ Thumbs.db
 
 # Local
 *.log
+
+# Python
+__pycache__/
+*.pyc

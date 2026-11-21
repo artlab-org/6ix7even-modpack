@@ -20,11 +20,12 @@
 2. [Installation rapide (automatique)](#installation-rapide-automatique)
 3. [Installation manuelle](#installation-manuelle)
 4. [Liens Modrinth (téléchargement direct)](#liens-modrinth-pour-téléchargement-direct)
-5. [Accès au serveur](#accès-au-serveur)
-6. [Chat vocal (proximité)](#chat-vocal-proximité)
-7. [Compatibilité launcher](#compatibilité-launcher)
-8. [Upgrade](#upgrade)
-9. [Notes](#notes)
+5. [Pack Modrinth (.mrpack)](#pack-modrinth-mrpack)
+6. [Accès au serveur](#accès-au-serveur)
+7. [Chat vocal (proximité)](#chat-vocal-proximité)
+8. [Compatibilité launcher](#compatibilité-launcher)
+9. [Upgrade](#upgrade)
+10. [Notes](#notes)
 
 ---
 
@@ -230,6 +231,82 @@ foreach ($mod in $mods) {
   }
 }
 ```
+
+---
+
+## Pack Modrinth (.mrpack)
+
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json` — il n'est **pas publié sur Modrinth** pour l'instant.
+
+```bash
+# Génère dist/artlab-client-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
+python3 tools/build_mrpack.py
+
+# Point d'entrée unique : génère PUIS valide (code de sortie ≠ 0 si un écart est détecté)
+python3 tools/build_mrpack.py --validate
+
+# Valider un pack déjà construit
+python3 tools/validate_mrpack.py dist/artlab-client-1.0.0.mrpack
+```
+
+Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) — aucune dépendance externe.
+
+Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256** — mesuré le 21 novembre 2026 sur le `mods/manifest.json` actuel :
+
+```text
+0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3  artlab-client-1.0.0.mrpack
+```
+
+> Cette empreinte est une **référence de reproductibilité**, pas un contrôle d'intégrité : elle change dès que le manifeste change (un mod, une version ou une URL de plus). Le contrôle d'intégrité, lui, est fait par `tools/validate_mrpack.py`, qui recalcule les empreintes de chaque `.jar` réel.
+
+Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et 13 entrées `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`). Un dossier `overrides/` n'est ajouté **que** si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel. Les `.jar` ne sont pas embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
+
+`tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances, vérifie qu'il y a une entrée par mod du manifeste et que chaque URL suit la forme `https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>`, et sort en code 1 au moindre écart. Un contrôle supplémentaire de l'API Modrinth (`GET /v2/version/<version_id>`, sha512 et taille distants) est disponible via `--online` ; sans ce drapeau, la validation reste **hors ligne et déterministe**.
+
+**Installation** : importer `dist/artlab-client-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack.
+
+| Launcher | Import `.mrpack` | Comment faire |
+|---|---|---|
+| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/artlab-client-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
+| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/artlab-client-1.0.0.mrpack` |
+| **Minecraft Launcher officiel** (Microsoft) | ❌ | Le launcher officiel sait utiliser un **profil Fabric** (voir [Compatibilité launcher](#compatibilité-launcher)) mais **n'importe pas** de `.mrpack` : utilise le Modrinth App, ou l'[installation manuelle](#installation-manuelle) des 13 `.jar` |
+| **TLauncher** / **SKLauncher** | ⚠️ non couvert | Leur gestion des mods est **propriétaire** et hors du périmètre de ce pack : pour rester aligné sur le pack, utilise le **Modrinth App** ou l'installation manuelle des 13 `.jar` |
+
+> Ce tableau décrit uniquement l'**import du fichier `.mrpack`**. Les 13 `.jar` restent installables à la main dans n'importe quel launcher ([Liens Modrinth](#liens-modrinth-pour-téléchargement-direct)).
+
+**Import manuel du fichier** : le `.mrpack` est une **archive ZIP** — tu peux l'ouvrir, lire `modrinth.index.json` et en tirer la liste des 13 mods avec leur URL de téléchargement et leurs empreintes, puis les installer à la main comme indiqué dans [Liens Modrinth](#liens-modrinth-pour-téléchargement-direct) :
+
+```bash
+# Le .mrpack est un ZIP : l'index se lit sans installer le pack
+unzip -p dist/artlab-client-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
+```
+
+> Le dossier `dist/` est ignoré par Git (`.gitignore`) : le `.mrpack` n'est **pas versionné**. Il est produit à la demande par la commande ci-dessus, ou fourni en pièce jointe par le canal de distribution du projet.
+
+### Client-only : ce que le pack installe — et ce qu'il ne contient pas
+
+Ce pack est **client-only** : il n'installe que ce qui tourne **chez le joueur**.
+
+- **Installé par le pack** : Minecraft 26.3, Fabric Loader 0.19.5 et les **13 mods client** (Fabric API, Sodium, Iris, Lithium, FerriteCore, Krypton, Mod Menu, Cloth Config, Distant Horizons, Fabric Language Kotlin, ViaFabric, Chunky, Plasmo Voice).
+- **Non installé par le pack** : la **configuration serveur** — `server.properties`, la liste des joueurs, la whitelist et les données du monde ne sont **pas** dans le `.mrpack`. Un dossier `overrides/` n'est embarqué que si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel ; à ce jour ces dossiers ne contiennent que des `.gitkeep`, donc **le pack ne contient que `modrinth.index.json`** (13 entrées, 7 458 octets).
+- **Mods côté serveur** : EasyAuth et Vanish tournent **sur le serveur**, pas dans le pack client (voir [Compatibilité serveur](#compatibilité-serveur)).
+
+Dans l'index, chaque mod est marqué `env: {client: required, server: unsupported}` : le pack ne peut pas être installé sur un serveur, et rien n'y est installé par erreur.
+
+**Après l'installation du pack**, il reste à rejoindre le serveur :
+
+1. Lance l'instance créée par le launcher (profil Fabric Loader 0.19.5).
+2. Ajoute le serveur : **`mc.6ix7even.cc` port `25565`** (accès public) ou `artlab` port `25565` (en tailnet).
+3. Connecte-toi avec n'importe quel pseudo, puis `/register <ton_mot_de_passe>` puis `/login <ton_mot_de_passe>` (voir [Accès au serveur](#accès-au-serveur)).
+
+> Le pack reste **facultatif** : sans lui, tu te connectes et tu joues normalement — tu perds seulement le rendu optimisé, Distant Horizons, les shaders et la voix (voir l'accroche en tête de ce README).
+
+### Page Modrinth du pack
+
+<!-- MODRINTH_URL -->
+<!-- URL attendue : https://modrinth.com/modpack/artlab-client -->
+
+**Page Modrinth du pack : URL à compléter** — le projet Modrinth de slug `artlab-client` (slug vérifié libre le 21 novembre 2026, `GET /v2/project/artlab-client` → 404) n'existe pas encore : rien n'est publié, le pack est distribué par ce dépôt uniquement. Le marqueur `MODRINTH_URL` ci-dessus devra être remplacé par l'URL réelle (`https://modrinth.com/modpack/artlab-client`) le jour où le projet sera créé — ne pas publier avant validation.
 
 ---
 
