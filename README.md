@@ -239,14 +239,14 @@ foreach ($mod in $mods) {
 Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json` — il n'est **pas publié sur Modrinth** pour l'instant.
 
 ```bash
-# Génère dist/artlab-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
+# Génère dist/artlab-client-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
 python3 tools/build_mrpack.py
 
 # Point d'entrée unique : génère PUIS valide (code de sortie ≠ 0 si un écart est détecté)
 python3 tools/build_mrpack.py --validate
 
 # Valider un pack déjà construit
-python3 tools/validate_mrpack.py dist/artlab-1.0.0.mrpack
+python3 tools/validate_mrpack.py dist/artlab-client-1.0.0.mrpack
 ```
 
 Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) — aucune dépendance externe.
@@ -254,21 +254,21 @@ Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) —
 Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256** — mesuré le 21 novembre 2026 sur le `mods/manifest.json` actuel :
 
 ```text
-0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3  artlab-1.0.0.mrpack
+0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3  artlab-client-1.0.0.mrpack
 ```
 
 > Cette empreinte est une **référence de reproductibilité**, pas un contrôle d'intégrité : elle change dès que le manifeste change (un mod, une version ou une URL de plus). Le contrôle d'intégrité, lui, est fait par `tools/validate_mrpack.py`, qui recalcule les empreintes de chaque `.jar` réel.
 
 Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et 13 entrées `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`). Un dossier `overrides/` n'est ajouté **que** si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel. Les `.jar` ne sont pas embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
 
-`tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances et les 13/13 mods, et sort en code 1 au moindre écart.
+`tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances, vérifie qu'il y a une entrée par mod du manifeste et que chaque URL suit la forme `https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>`, et sort en code 1 au moindre écart. Un contrôle supplémentaire de l'API Modrinth (`GET /v2/version/<version_id>`, sha512 et taille distants) est disponible via `--online` ; sans ce drapeau, la validation reste **hors ligne et déterministe**.
 
-**Installation** : importer `dist/artlab-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack.
+**Installation** : importer `dist/artlab-client-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack.
 
 | Launcher | Import `.mrpack` | Comment faire |
 |---|---|---|
-| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/artlab-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
-| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/artlab-1.0.0.mrpack` |
+| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/artlab-client-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
+| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/artlab-client-1.0.0.mrpack` |
 | **Minecraft Launcher officiel** (Microsoft) | ❌ | Le launcher officiel sait utiliser un **profil Fabric** (voir [Compatibilité launcher](#compatibilité-launcher)) mais **n'importe pas** de `.mrpack` : utilise le Modrinth App, ou l'[installation manuelle](#installation-manuelle) des 13 `.jar` |
 | **TLauncher** / **SKLauncher** | ⚠️ non couvert | Leur gestion des mods est **propriétaire** et hors du périmètre de ce pack : pour rester aligné sur le pack, utilise le **Modrinth App** ou l'installation manuelle des 13 `.jar` |
 
@@ -278,7 +278,7 @@ Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth
 
 ```bash
 # Le .mrpack est un ZIP : l'index se lit sans installer le pack
-unzip -p dist/artlab-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
+unzip -p dist/artlab-client-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
 ```
 
 > Le dossier `dist/` est ignoré par Git (`.gitignore`) : le `.mrpack` n'est **pas versionné**. Il est produit à la demande par la commande ci-dessus, ou fourni en pièce jointe par le canal de distribution du projet.
@@ -301,14 +301,12 @@ Dans l'index, chaque mod est marqué `env: {client: required, server: unsupporte
 
 > Le pack reste **facultatif** : sans lui, tu te connectes et tu joues normalement — tu perds seulement le rendu optimisé, Distant Horizons, les shaders et la voix (voir l'accroche en tête de ce README).
 
-### Page Modrinth du pack — URL à compléter
+### Page Modrinth du pack
 
 <!-- MODRINTH_URL -->
-<!-- URL attendue : https://modrinth.com/modpack/<slug> -->
+<!-- URL attendue : https://modrinth.com/modpack/artlab-client -->
 
-**Page Modrinth du pack : URL à compléter.** Le projet Modrinth n'existe pas encore : le pack est distribué par ce dépôt uniquement. Le marqueur `MODRINTH_URL` ci-dessus devra être remplacé par l'URL réelle (`https://modrinth.com/modpack/<slug>`) le jour où le projet Modrinth sera créé.
-
-> ⚠️ **Slug Modrinth du projet : à compléter.** Le projet n'existe pas encore sur Modrinth : le pack n'est distribué que par ce dépôt, rien n'est publié. Quand le slug sera fixé, le remplacer dans `tools/build_mrpack.py` (`DEFAULT_SLUG`) et dans cette section — ne pas publier avant validation.
+**Page Modrinth du pack : URL à compléter** — le projet Modrinth de slug `artlab-client` (slug vérifié libre le 21 novembre 2026, `GET /v2/project/artlab-client` → 404) n'existe pas encore : rien n'est publié, le pack est distribué par ce dépôt uniquement. Le marqueur `MODRINTH_URL` ci-dessus devra être remplacé par l'URL réelle (`https://modrinth.com/modpack/artlab-client`) le jour où le projet sera créé — ne pas publier avant validation.
 
 ---
 

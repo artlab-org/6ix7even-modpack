@@ -6,15 +6,21 @@ Controles :
   * structure de l'index conforme a la spec Modrinth
     (https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) ;
   * dependances et versionId coherentes avec ``mods/manifest.json`` ;
-  * 13/13 mods declares, un par entree, avec path/hashes/env/downloads/fileSize ;
+  * un mod du manifeste par entree de l'index, avec
+    path/hashes/env/downloads/fileSize ;
+  * forme des URLs de fichiers Modrinth
+    (``https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>``) ;
   * sha1, sha512 et fileSize *recalcules depuis les fichiers reels* (.jar presents
-    dans ``mods/``, sinon telecharges depuis ``downloads[]``) et compares a l'index.
+    dans ``mods/``, sinon telecharges depuis ``downloads[]``) et compares a l'index ;
+  * optionnellement (``--online``) le sha512 et la taille declares par l'API
+    Modrinth (``GET /v2/version/<version_id>``).
 
 Code de sortie : 0 si tout est conforme, 1 sinon.
 
 Usage :
-    python3 tools/validate_mrpack.py dist/artlab-1.0.0.mrpack
+    python3 tools/validate_mrpack.py dist/artlab-client-1.0.0.mrpack
     python3 tools/validate_mrpack.py                 # auto-detecte le pack de dist/
+    python3 tools/validate_mrpack.py --online         # + controle de l'API Modrinth
 """
 
 from __future__ import annotations
@@ -22,6 +28,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 import urllib.request
 import zipfile
@@ -36,6 +43,22 @@ INDEX_NAME = "modrinth.index.json"
 EXPECTED_FORMAT_VERSION = 1
 ALLOWED_DOWNLOAD_HOSTS = ("cdn.modrinth.com",)
 VALID_SIDES = ("required", "optional", "unsupported")
+
+# Forme attendue des URLs de fichiers Modrinth (hote CDN) :
+#   https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>
+CDN_URL_PATTERN = re.compile(
+    r"^https://cdn\.modrinth\.com/data/(?P<project_id>[A-Za-z0-9]+)"
+    r"/versions/(?P<version_id>[A-Za-z0-9]+)/(?P<filename>.+)$"
+)
+
+# API Modrinth (controle optionnel, hors ligne par defaut) :
+#   GET https://api.modrinth.com/v2/version/<version_id>
+MODRINTH_VERSION_API = "https://api.modrinth.com/v2/version/{version_id}"
+
+# Nombre de mods du pack actuel — information NON bloquante : la validation
+# compare le nombre d'entrees de l'index au nombre de mods du manifeste, donc
+# ajouter un mod au manifeste ne doit pas casser la validation.
+EXPECTED_MOD_COUNT = 13
 
 
 class Report:
@@ -87,6 +110,68 @@ def fetch(url: str, cache_dir: Path, filename: str) -> Path:
     return target
 
 
+def fetch_json(url: str) -> dict:
+    """Recupere un document JSON public (API Modrinth)."""
+    request = urllib.request.Request(url, headers={"User-Agent": "artlab-mrpack-validator/1.0"})
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def check_modrinth_api(report: Report, mods: list) -> None:
+    """Controle OPTIONNEL de l'API Modrinth (hors ligne par defaut).
+
+    Pour chaque mod, lit ``GET /v2/version/<version_id>`` (version_id extrait de
+    l'URL CDN du manifest) et verifie que le sha512 et la taille declares par
+    Modrinth correspondent au manifeste.
+    """
+    print("== API Modrinth (controle en ligne, --online)")
+    for mod in mods:
+        url = mod.get("url", "")
+        match = CDN_URL_PATTERN.match(url)
+        if match is None:
+            report.ko(
+                f"{mod.get('slug')} : URL CDN exploitable pour l'API",
+                f"forme inattendue: {url}",
+            )
+            continue
+        version_id = match.group("version_id")
+        api_url = MODRINTH_VERSION_API.format(version_id=version_id)
+        try:
+            payload = fetch_json(api_url)
+        except Exception as error:  # noqa: BLE001 - le cas est reporte dans le rapport
+            report.ko(
+                f"{mod['slug']} : API Modrinth /v2/version/{version_id}",
+                f"requete impossible: {error}",
+            )
+            continue
+        hashes = payload.get("hashes") or {}
+        remote_sha512 = hashes.get("sha512")
+        remote_size = payload.get("file_size")
+        if remote_size is None:
+            primary = next(
+                (f for f in payload.get("files") or [] if f.get("primary")),
+                None,
+            )
+            if primary:
+                remote_size = primary.get("size")
+                remote_sha512 = remote_sha512 or (primary.get("hashes") or {}).get("sha512")
+        problems = []
+        if payload.get("id") not in (None, version_id):
+            problems.append(f"version_id distant {payload.get('id')} != {version_id}")
+        if remote_sha512 != mod["sha512"]:
+            problems.append(
+                f"sha512 distant {str(remote_sha512)[:16]}... != manifest {mod['sha512'][:16]}..."
+            )
+        if remote_size != mod["size"]:
+            problems.append(f"taille distante {remote_size} != manifest {mod['size']}")
+        report.check(
+            not problems,
+            f"{mod['slug']} : sha512/taille confirmes par l'API Modrinth",
+            f"version_id={version_id}",
+            "; ".join(problems),
+        )
+
+
 def auto_detect_pack(out_dir: Path) -> Path:
     candidates = sorted(out_dir.glob("*.mrpack"))
     if not candidates:
@@ -96,7 +181,13 @@ def auto_detect_pack(out_dir: Path) -> Path:
     return candidates[0]
 
 
-def validate(pack_path: Path, manifest_path: Path, mods_dir: Path, cache_dir: Path) -> Report:
+def validate(
+    pack_path: Path,
+    manifest_path: Path,
+    mods_dir: Path,
+    cache_dir: Path,
+    online: bool = False,
+) -> Report:
     report = Report()
     print(f"== Archive : {pack_path}")
     if not pack_path.exists():
@@ -162,10 +253,11 @@ def validate(pack_path: Path, manifest_path: Path, mods_dir: Path, cache_dir: Pa
     print("== Coherence avec mods/manifest.json")
     report.check(index.get("versionId") == manifest["version"], "versionId == manifest version", f"{index.get('versionId')}")
     report.check(
-        len(files) == len(mods) == 13,
-        "13/13 mods declares dans l'index",
-        f"index={len(files)} manifest={len(mods)}",
-        f"index={len(files)} manifest={len(mods)} (attendu 13)",
+        len(files) == len(mods),
+        "un mod du manifeste par entree de l'index",
+        f"index={len(files)} manifest={len(mods)} (pack actuel : {EXPECTED_MOD_COUNT} mods)",
+        f"index={len(files)} manifest={len(mods)} : chaque mod du manifeste "
+        f"doit avoir exactement une entree dans l'index",
     )
     by_path = {entry.get("path"): entry for entry in files} if isinstance(files, list) else {}
     for mod in mods:
@@ -198,6 +290,18 @@ def validate(pack_path: Path, manifest_path: Path, mods_dir: Path, cache_dir: Pa
                 url,
                 f"URL non autorise: {url}",
             )
+            match = CDN_URL_PATTERN.match(url)
+            report.check(
+                match is not None,
+                f"{entry.get('path')} : forme d'URL CDN Modrinth",
+                (
+                    f"project_id={match.group('project_id')} version_id={match.group('version_id')}"
+                    if match
+                    else ""
+                ),
+                "forme attendue: https://cdn.modrinth.com/data/<project_id>/versions/"
+                f"<version_id>/<fichier> — recu: {url}",
+            )
 
     print("== Empreintes recalculees depuis les fichiers reels")
     for mod in mods:
@@ -222,6 +326,9 @@ def validate(pack_path: Path, manifest_path: Path, mods_dir: Path, cache_dir: Pa
             problems.append(f"taille reelle {size} != fileSize {index_size}")
         report.check(not problems, f"{mod['slug']} : sha1/sha512/fileSize recalcules", f"{mod['filename']} ({size} o)", "; ".join(problems))
 
+    if online:
+        check_modrinth_api(report, mods)
+
     return report
 
 
@@ -232,10 +339,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--mods-dir", type=Path, default=DEFAULT_MODS_DIR, help="dossier des .jar reels")
     parser.add_argument("--cache-dir", type=Path, default=DEFAULT_CACHE_DIR, help="cache des .jar telecharges")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="dossier de recherche du pack")
+    parser.add_argument(
+        "--online",
+        action="store_true",
+        help="controle supplementaire de l'API Modrinth (sha512/taille distants) ; "
+        "par defaut la validation reste hors ligne et deterministe",
+    )
     args = parser.parse_args(argv)
 
     pack_path = args.pack or auto_detect_pack(args.out_dir)
-    report = validate(pack_path, args.manifest, args.mods_dir, args.cache_dir)
+    report = validate(pack_path, args.manifest, args.mods_dir, args.cache_dir, online=args.online)
     print("")
     if report.errors:
         print(f"== Bilan : {report.checks} controles, {len(report.errors)} ECART(S)")

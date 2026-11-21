@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generateur deterministe de pack Modrinth (.mrpack) pour le modpack client artlab.
 
-Source de verite : ``mods/manifest.json`` (13 mods eingles, hashes et URLs).
+Source de verite : ``mods/manifest.json`` (mods figes, hashes et URLs).
 
 Format de sortie : spec officielle du format de pack Modrinth, telle qu'elle est
 implementee par le launcher Modrinth :
@@ -36,10 +36,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MANIFEST = REPO_ROOT / "mods" / "manifest.json"
 DEFAULT_OUT_DIR = REPO_ROOT / "dist"
 
-# Slug du projet Modrinth : PAS ENCORE FIXE (rien n'est publie sur Modrinth).
-# A completer quand le projet Modrinth sera cree ; seule la construction locale
-# du .mrpack est concernee ici.
-DEFAULT_SLUG = "artlab"
+# Slug du projet Modrinth : "artlab-client" (slug verifie libre le 2026-11-21 :
+# GET /v2/project/artlab-client -> 404 ; projet a creer a la publication).
+# Le slug ne sert qu'au NOM du fichier .mrpack : il n'entre pas dans
+# modrinth.index.json, le contenu du pack reste inchange.
+DEFAULT_SLUG = "artlab-client"
 DEFAULT_NAME = "Artlab client"
 DEFAULT_SUMMARY = (
     "Modpack client artlab : Minecraft 26.3 (Fabric loader 0.19.5), "
@@ -55,6 +56,10 @@ ZIP_EPOCH = (1980, 1, 1, 0, 0, 0)
 
 INDEX_NAME = "modrinth.index.json"
 
+# Cles obligatoires pour chaque mod du manifeste : leur absence est une erreur
+# explicite (et non une KeyError brute au moment de la construction).
+REQUIRED_MOD_KEYS = ("slug", "version", "filename", "url", "sha1", "sha512", "size")
+
 
 def load_manifest(path: Path) -> dict:
     with path.open(encoding="utf-8") as handle:
@@ -62,6 +67,21 @@ def load_manifest(path: Path) -> dict:
     for key in ("version", "mc_version", "fabric_loader", "mods"):
         if key not in manifest:
             raise SystemExit(f"manifest invalide : cle '{key}' absente de {path}")
+    mods = manifest["mods"]
+    if not isinstance(mods, list):
+        raise SystemExit(f"manifest invalide : 'mods' doit etre une liste dans {path}")
+    for position, mod in enumerate(mods):
+        if not isinstance(mod, dict):
+            raise SystemExit(
+                f"manifest invalide : mods[{position}] n'est pas un objet dans {path}"
+            )
+        missing = [key for key in REQUIRED_MOD_KEYS if key not in mod]
+        if missing:
+            slug = mod.get("slug") or f"#{position}"
+            raise SystemExit(
+                f"manifest invalide : mod '{slug}' (mods[{position}]) incomplet dans {path} "
+                f"— cle(s) manquante(s) : {', '.join(missing)}"
+            )
     return manifest
 
 
