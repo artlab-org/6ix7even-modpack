@@ -20,11 +20,12 @@
 2. [Installation rapide (automatique)](#installation-rapide-automatique)
 3. [Installation manuelle](#installation-manuelle)
 4. [Liens Modrinth (téléchargement direct)](#liens-modrinth-pour-téléchargement-direct)
-5. [Accès au serveur](#accès-au-serveur)
-6. [Chat vocal (proximité)](#chat-vocal-proximité)
-7. [Compatibilité launcher](#compatibilité-launcher)
-8. [Upgrade](#upgrade)
-9. [Notes](#notes)
+5. [Pack Modrinth (.mrpack)](#pack-modrinth-mrpack)
+6. [Accès au serveur](#accès-au-serveur)
+7. [Chat vocal (proximité)](#chat-vocal-proximité)
+8. [Compatibilité launcher](#compatibilité-launcher)
+9. [Upgrade](#upgrade)
+10. [Notes](#notes)
 
 ---
 
@@ -230,6 +231,33 @@ foreach ($mod in $mods) {
   }
 }
 ```
+
+---
+
+## Pack Modrinth (.mrpack)
+
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json` — il n'est **pas publié sur Modrinth** pour l'instant.
+
+```bash
+# Génère dist/artlab-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
+python3 tools/build_mrpack.py
+
+# Point d'entrée unique : génère PUIS valide (code de sortie ≠ 0 si un écart est détecté)
+python3 tools/build_mrpack.py --validate
+
+# Valider un pack déjà construit
+python3 tools/validate_mrpack.py dist/artlab-1.0.0.mrpack
+```
+
+Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) — aucune dépendance externe.
+
+Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et 13 entrées `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`). Un dossier `overrides/` n'est ajouté **que** si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel. Les `.jar` ne sont pas embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
+
+`tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances et les 13/13 mods, et sort en code 1 au moindre écart.
+
+**Installation** : importer `dist/artlab-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack.
+
+> ⚠️ **Slug Modrinth du projet : à compléter.** Le projet n'existe pas encore sur Modrinth : le pack n'est distribué que par ce dépôt, rien n'est publié. Quand le slug sera fixé, le remplacer dans `tools/build_mrpack.py` (`DEFAULT_SLUG`) et dans cette section — ne pas publier avant validation.
 
 ---
 
