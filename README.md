@@ -236,7 +236,7 @@ foreach ($mod in $mods) {
 
 ## Pack Modrinth (.mrpack)
 
-Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json` — il n'est **pas publié sur Modrinth** pour l'instant.
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`, et il est **publié sur Modrinth** depuis le 22 novembre 2026 : projet [`artlab-client`](https://modrinth.com/modpack/artlab-client) (organisation **Artlab**, type `modpack`), version **1.0.0** (Minecraft 26.3, Fabric). Le même fichier est aussi en pièce jointe de la [release GitHub](https://github.com/artlab-org/mc-modpack-client/releases).
 
 ```bash
 # Génère dist/artlab-client-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
@@ -263,7 +263,7 @@ Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth
 
 `tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances, vérifie qu'il y a une entrée par mod du manifeste et que chaque URL suit la forme `https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>`, et sort en code 1 au moindre écart. Un contrôle supplémentaire de l'API Modrinth (`GET /v2/version/<version_id>`, sha512 et taille distants) est disponible via `--online` ; sans ce drapeau, la validation reste **hors ligne et déterministe**.
 
-**Installation** : importer `dist/artlab-client-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack.
+**Installation** : importer `dist/artlab-client-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack. Une fois la modération Modrinth validée, la [page du projet](https://modrinth.com/modpack/artlab-client) permettra en plus l'installation en un clic depuis le launcher.
 
 | Launcher | Import `.mrpack` | Comment faire |
 |---|---|---|
@@ -303,10 +303,11 @@ Dans l'index, chaque mod est marqué `env: {client: required, server: unsupporte
 
 ### Page Modrinth du pack
 
-<!-- MODRINTH_URL -->
-<!-- URL attendue : https://modrinth.com/modpack/artlab-client -->
+**Page Modrinth du pack : <https://modrinth.com/modpack/artlab-client>**
 
-**Page Modrinth du pack : URL à compléter** — le projet Modrinth de slug `artlab-client` (slug vérifié libre le 21 novembre 2026, `GET /v2/project/artlab-client` → 404) n'existe pas encore : rien n'est publié, le pack est distribué par ce dépôt uniquement. Le marqueur `MODRINTH_URL` ci-dessus devra être remplacé par l'URL réelle (`https://modrinth.com/modpack/artlab-client`) le jour où le projet sera créé — ne pas publier avant validation.
+Projet Modrinth `artlab-client` (id `Y6UiohXZ`), publié sous l'**organisation Artlab** (`OaROVVjY`), type `modpack`, licence MIT, Minecraft **26.3**, chargeur **Fabric** (`client_side: required`, `server_side: unsupported`).
+
+La version **1.0.0** (id `MkI0FmNB`, `release`) y est publiée avec le fichier `artlab-client-1.0.0.mrpack` (**2 597 o**, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3` — identique à la release GitHub). Le projet est **soumis à la modération Modrinth** (`status: processing`) : tant que la validation n'est pas faite, la page affiche « Project not found » et le projet n'apparaît pas encore dans les listes. D'ici là, le `.mrpack` reste téléchargeable depuis la [release GitHub `mrpack-v1.0.0`](https://github.com/artlab-org/mc-modpack-client/releases/tag/mrpack-v1.0.0).
 
 ---
 
