@@ -58,7 +58,7 @@ MODRINTH_VERSION_API = "https://api.modrinth.com/v2/version/{version_id}"
 # Nombre de mods du pack actuel — information NON bloquante : la validation
 # compare le nombre d'entrees de l'index au nombre de mods du manifeste, donc
 # ajouter un mod au manifeste ne doit pas casser la validation.
-EXPECTED_MOD_COUNT = 13
+EXPECTED_MOD_COUNT = 24
 
 
 class Report:

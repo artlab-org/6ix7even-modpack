@@ -44,7 +44,8 @@ DEFAULT_SLUG = "6ix7even"
 DEFAULT_NAME = "6ix7even client"
 DEFAULT_SUMMARY = (
     "Pack client 6ix7even : Minecraft 26.3 (Fabric loader 0.19.5), "
-    "13 mods optimises (rendu, performance, monde distant, voix). "
+    "24 mods optimises (rendu, performance, monde distant, voix, shader) "
+    "avec resource packs et shader packs. "
     "Pack genere localement depuis mods/manifest.json."
 )
 

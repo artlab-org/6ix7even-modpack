@@ -1,84 +1,40 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "mc_version": "26.3",
   "fabric_loader": "0.19.5",
   "mods": [
     {
-      "slug": "fabric-api",
-      "version": "0.163.0+26.3",
-      "filename": "fabric-api-0.163.0+26.3.jar",
-      "url": "https://cdn.modrinth.com/data/P7dR8mSH/versions/bq3SsNGk/fabric-api-0.163.0%2B26.3.jar",
-      "sha512": "44fd8de10fa71ea39cf984d44d2ec4c8e9314f8af88ad95788d9a09ac7b02b5c2f796ae88f40e314bd27df677e66fed59d1a1b6784350b0cc1fd62efac9e08a3",
-      "sha1": "65ada8c72b61ffb256e956baf53df28155daa479",
-      "size": 1774707,
-      "downloads": 1622830,
-      "release": "2026-10-14T10:26:01.187774Z"
+      "slug": "better-autoclicker",
+      "version": "1.4.4+mc26.3",
+      "filename": "betterAutoclicker-fabric-1.4.4+mc26.3.jar",
+      "url": "https://cdn.modrinth.com/data/DN9wWY3j/versions/6pYrIgDv/betterAutoclicker-fabric-1.4.4%2Bmc26.3.jar",
+      "sha512": "c43e397976fe2a7fb016c34f7d42804d7d5fec0c1e2e28de174106ce005a17b92bc8ab98817fcd56a9e9872d60b02482fe6baf2a59877b366e7e062148b408d5",
+      "sha1": "a9f8efa87e5a983213fb3902acde69af213c0984",
+      "size": 69375,
+      "downloads": 515,
+      "release": "2026-10-21T15:34:44.957275Z"
     },
     {
-      "slug": "sodium",
-      "version": "mc26.3-0.9.3-beta.1-fabric",
-      "filename": "sodium-fabric-0.9.3-beta.1+mc26.3.jar",
-      "url": "https://cdn.modrinth.com/data/AANobbMI/versions/g6ju16VJ/sodium-fabric-0.9.3-beta.1%2Bmc26.3.jar",
-      "sha512": "884a1ef0ce0e69d565d41a1359070a8d4f8589a086b565540defdb4741985053077dfd0f2a56898ce60510720a9f95dd8ba220a9a6340b6e0cf5cb12352e2419",
-      "sha1": "1e6aec741b4134258ba1d7d458bae96a2e8e187e",
-      "size": 1912496,
-      "downloads": 337153,
-      "release": "2026-10-15T17:51:44.107526Z"
+      "slug": "chat-heads",
+      "version": "1.3.3",
+      "filename": "chat_heads-1.3.3-fabric-26.3.jar",
+      "url": "https://cdn.modrinth.com/data/Wb5oqrBJ/versions/9O2ZSOkh/chat_heads-1.3.3-fabric-26.3.jar",
+      "sha512": "8f6d3c42128ca54252090c5b5c06cf68c98c106b454aaec9dd94aa1ccd499fd2603b44d559f4ee9b8124c1eaf86233ba2290ba2f93d07480fe2e9fe3c534bfb5",
+      "sha1": "7c5267b57d813e6394b848cbdecc34c8cebe73bd",
+      "size": 98703,
+      "downloads": 22506,
+      "release": "2026-11-22T17:51:23.145696Z"
     },
     {
-      "slug": "iris",
-      "version": "1.11.7+26.3-fabric",
-      "filename": "iris-fabric-1.11.7+mc26.3.jar",
-      "url": "https://cdn.modrinth.com/data/YL57xq9U/versions/vTN4NRGW/iris-fabric-1.11.7%2Bmc26.3.jar",
-      "sha512": "d8d3312f77fc52a48e4a6cd836fda33669bdebcb4de0b8c0d30adc808b287330a533e0baef355cc1ce6336a26851d9775369a802a4666b7b7a6266af20088f42",
-      "sha1": "fa03640ba1e4ef2f7ae3619c6373a06e46d0ba2c",
-      "size": 2850938,
-      "downloads": 3203808,
-      "release": "2026-09-30T02:57:43.801379Z"
-    },
-    {
-      "slug": "lithium",
-      "version": "mc26.3-0.26.2-fabric",
-      "filename": "lithium-fabric-0.26.2+mc26.3.jar",
-      "url": "https://cdn.modrinth.com/data/gvQqBUqZ/versions/xS0Q8LSi/lithium-fabric-0.26.2%2Bmc26.3.jar",
-      "sha512": "4d7fee66132eedc71feab9390b92c95d7058edbdad0fecfac1d836a2950b97a7ca463afbede61c7ef361ce65e1f927ab9e89dde5bf2e0e0ce486afb5c5dbee40",
-      "sha1": "dd5a4ec2c68d7601d8bce9076f789c55a5f8bef3",
-      "size": 914543,
-      "downloads": 1995027,
-      "release": "2026-09-28T03:43:35.593224Z"
-    },
-    {
-      "slug": "ferrite-core",
-      "version": "9.0.0-fabric",
-      "filename": "ferritecore-9.0.0-fabric.jar",
-      "url": "https://cdn.modrinth.com/data/uXXizFIs/versions/d5ddUdiB/ferritecore-9.0.0-fabric.jar",
-      "sha512": "d81fa97e11784c19d42f89c2f433831d007603dd7193cee45fa177e4a6a9c52b384b198586e04a0f7f63cd996fed713322578bde9a8db57e1188854ae5cbe584",
-      "sha1": "eac76ff0f3753422c61b2c44487d0d195d88d4bc",
-      "size": 72677,
-      "downloads": 15307781,
-      "release": "2026-03-24T18:31:50.491773Z"
-    },
-    {
-      "slug": "krypton",
-      "version": "0.3.2",
-      "filename": "krypton-0.3.2.jar",
-      "url": "https://cdn.modrinth.com/data/fQEb0iXm/versions/UugdIYJw/krypton-0.3.2.jar",
-      "sha512": "d1d57ebd41395b75b01f130cd9503eb8d208212424a399ff9f367f50be8fbc1c6472442b33c686e777c3148f6a609520e8fb732c755157c358cb207fd4d1123a",
-      "sha1": "21b21cb88e412f0bce73b6609de6dd6aca958d7d",
-      "size": 268849,
-      "downloads": 299026,
-      "release": "2026-09-30T05:12:54.012334Z"
-    },
-    {
-      "slug": "modmenu",
-      "version": "21.0.0",
-      "filename": "modmenu-21.0.0.jar",
-      "url": "https://cdn.modrinth.com/data/mOgUt4GM/versions/kyy7dbrZ/modmenu-21.0.0.jar",
-      "sha512": "588c0c557963f4778572ee81bfafc190b332c26d5926c5fe7e3e1614dcf8e14f58e3bc80a97694521dd05907e9753a7c8575048ea769e4dbf40a3db74a4e2606",
-      "sha1": "66ec40f1cd0c037ddca2b5fc6b4b976d479c18e8",
-      "size": 856779,
-      "downloads": 3074997,
-      "release": "2026-09-23T21:31:03.843943Z"
+      "slug": "chunky",
+      "version": "1.5.66",
+      "filename": "Chunky-Fabric-1.5.66.jar",
+      "url": "https://cdn.modrinth.com/data/fALzjamp/versions/86FKD9qx/Chunky-Fabric-1.5.66.jar",
+      "sha512": "6f0323daa69d61bd3b3fbe9d8b713664d9b7c69182183f8dcff6362b43783639778a96e32215dbfd329588f06b60a5d93656dbb1d391c660db203482aa972d5e",
+      "sha1": "f78eca46c3882ee637d3ba3982da217776f55fc7",
+      "size": 442176,
+      "downloads": 154713,
+      "release": "2026-11-04T03:02:04.095140Z"
     },
     {
       "slug": "cloth-config",
@@ -88,8 +44,30 @@
       "sha512": "8924e19d41845096724fa10f3717bc51964a0edbbbcad0ff1e6c6187a398b08f356e49579a657c2dc44a7f92e3850771f3ca70bf8c1f654de60425163b91dbb1",
       "sha1": "9a5cce069380a2047250831dcb19f4ef1b15872d",
       "size": 1135009,
-      "downloads": 2316100,
+      "downloads": 4177403,
       "release": "2026-09-23T07:00:48.136714Z"
+    },
+    {
+      "slug": "continuity",
+      "version": "3.0.1+26.3",
+      "filename": "continuity-3.0.1+26.3.jar",
+      "url": "https://cdn.modrinth.com/data/1IjD5062/versions/Jt2sCWTQ/continuity-3.0.1%2B26.3.jar",
+      "sha512": "1ec1e3b2f73c26b19445d664822a8936e9076f4d8855a2ed5fac19786daa8da42da8fdc9526c4a53c227a82819a87ad8e73d5b4fc003f6519c50454c33014f04",
+      "sha1": "63d51781b2c87e3b4b4ca98a133db8c98d3f2afb",
+      "size": 1002033,
+      "downloads": 2619856,
+      "release": "2026-09-16T03:20:55.014943Z"
+    },
+    {
+      "slug": "controlify",
+      "version": "3.5.3+mc26.3",
+      "filename": "controlify-3.5.3+mc26.3-universal.jar",
+      "url": "https://cdn.modrinth.com/data/DOUdJVEm/versions/fo76vL20/controlify-3.5.3%2Bmc26.3-universal.jar",
+      "sha512": "cd4e64a9621dff200329b249dc63fc4542ce554db16c75c4b04cfa7495bf84e1a4bca0f89a7a9d4d425f6b6f23c8df52ab8ce323ee18ae49c6cf24858697bbf7",
+      "sha1": "9df91163e9a325c83215df29bf743bd0e4aa544f",
+      "size": 6410187,
+      "downloads": 1204764,
+      "release": "2026-09-23T20:57:06.647744Z"
     },
     {
       "slug": "distanthorizons",
@@ -99,8 +77,41 @@
       "sha512": "0b90b1b08d99974bfc3c8e86b2ceb252e2f91715ed66b925004c28335fb44e1bddbbb6b8043e4d4d53c87ed247789cd1788b1ba4e3f4394efe154e0c59cff236",
       "sha1": "310c0363068dfae18e91f799ed671a591b6ad49a",
       "size": 28476894,
-      "downloads": 662039,
+      "downloads": 821510,
       "release": "2026-09-29T02:28:16.579862Z"
+    },
+    {
+      "slug": "entity-model-features",
+      "version": "3.3.12-fabric-26.3",
+      "filename": "entity_model_features-3.3.12-26.3-fabric.jar",
+      "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/vF6qLXsA/entity_model_features-3.3.12-26.3-fabric.jar",
+      "sha512": "4572fc065e757264947aff35a96d17d5e45d4b43e8e385b9a207f5380a8f43da5dbf8e10f30a7bc7cc4c0c8f7999717b4dd22d325667bdf8a0de6e839ad81efc",
+      "sha1": "2d076285c7e0671165fc86a827e62ce88ddcd201",
+      "size": 665386,
+      "downloads": 1199976,
+      "release": "2026-10-15T07:13:19.678633Z"
+    },
+    {
+      "slug": "entitytexturefeatures",
+      "version": "7.2.7-fabric-26.3",
+      "filename": "entity_texture_features-7.2.7-26.3-fabric.jar",
+      "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/svwZ2o4d/entity_texture_features-7.2.7-26.3-fabric.jar",
+      "sha512": "69193c58d4d05e08fea9afa34cc47563e9b9e95aa2da276441085ade44ed36f8123b9cc1a2938f9ecac9aea6fd9ceb51120dd20f7284337a3bb592bc3b904336",
+      "sha1": "29f48f42d72007ce13b4678fac5b2ef5986879e4",
+      "size": 798322,
+      "downloads": 513634,
+      "release": "2026-11-03T10:30:25.071075Z"
+    },
+    {
+      "slug": "fabric-api",
+      "version": "0.166.2+26.3",
+      "filename": "fabric-api-0.166.2+26.3.jar",
+      "url": "https://cdn.modrinth.com/data/P7dR8mSH/versions/Zns5SSRA/fabric-api-0.166.2%2B26.3.jar",
+      "sha512": "fb686a9fa923248328107a12498229d6951e316257f18b7d0e4cbd6885ba447ed50a44076a8a5ba47cfe2043b329db3587ab000aeab1face26b2587a5d4ba6b5",
+      "sha1": "65636253571429971f25f5619692e6c1a6362028",
+      "size": 1797523,
+      "downloads": 1928223,
+      "release": "2026-11-11T13:38:52.250683Z"
     },
     {
       "slug": "fabric-language-kotlin",
@@ -110,30 +121,74 @@
       "sha512": "7fb475c4a7e7bdf8d0aca4b5798a58a354c51443d5b1fbde3e8cf34dfbf7191ef4238b5f07d08ec9490ec180b371624523326c3ad45d4ed2b2be541de9407e5d",
       "sha1": "f1d4ab6ecd54d9782521333a87eb50724ecb03e0",
       "size": 8142878,
-      "downloads": 2560829,
+      "downloads": 5406540,
       "release": "2026-10-09T08:17:15.786208Z"
     },
     {
-      "slug": "viafabric",
-      "version": "0.4.22+186-26.x",
-      "filename": "ViaFabric-0.4.22+186-26.x.jar",
-      "url": "https://cdn.modrinth.com/data/YlKdE5VK/versions/qiAP0t9R/ViaFabric-0.4.22%2B186-26.x.jar",
-      "sha512": "9098d75597b5a91bb50fa80228e729e87ed9aee70e19fda86fdc4c0e73127eaf1b7ece5b71a61149b34d9a8e17c0560f4be0d6c15537e7361d20e0fd641b6f4e",
-      "sha1": "be321e1e3215e8cc6b29270365afd9550dd5e788",
-      "size": 5914365,
-      "downloads": 30827,
-      "release": "2026-10-02T15:07:22.744328Z"
+      "slug": "ferrite-core",
+      "version": "9.0.0-fabric",
+      "filename": "ferritecore-9.0.0-fabric.jar",
+      "url": "https://cdn.modrinth.com/data/uXXizFIs/versions/d5ddUdiB/ferritecore-9.0.0-fabric.jar",
+      "sha512": "d81fa97e11784c19d42f89c2f433831d007603dd7193cee45fa177e4a6a9c52b384b198586e04a0f7f63cd996fed713322578bde9a8db57e1188854ae5cbe584",
+      "sha1": "eac76ff0f3753422c61b2c44487d0d195d88d4bc",
+      "size": 72677,
+      "downloads": 18001258,
+      "release": "2026-03-24T18:31:50.491773Z"
     },
     {
-      "slug": "chunky",
-      "version": "1.5.3",
-      "filename": "Chunky-Fabric-1.5.3.jar",
-      "url": "https://cdn.modrinth.com/data/fALzjamp/versions/4Eotm6ov/Chunky-Fabric-1.5.3.jar",
-      "sha512": "b83bfe7b218d0aa6232af977ae741dc1f82b10e50cd12bb759f65cf416b8b62beccb543e587ef0b9670abe03815660f8e091bc6823624d65cf07300571573516",
-      "sha1": "fc1f2f374c5c82117599071ed18b6ef9bba2c7fb",
-      "size": 354095,
-      "downloads": 1186864,
-      "release": "2026-05-04T05:47:16.215347Z"
+      "slug": "iris",
+      "version": "1.11.7+26.3-fabric",
+      "filename": "iris-fabric-1.11.7+mc26.3.jar",
+      "url": "https://cdn.modrinth.com/data/YL57xq9U/versions/vTN4NRGW/iris-fabric-1.11.7%2Bmc26.3.jar",
+      "sha512": "d8d3312f77fc52a48e4a6cd836fda33669bdebcb4de0b8c0d30adc808b287330a533e0baef355cc1ce6336a26851d9775369a802a4666b7b7a6266af20088f42",
+      "sha1": "fa03640ba1e4ef2f7ae3619c6373a06e46d0ba2c",
+      "size": 2850938,
+      "downloads": 4637879,
+      "release": "2026-09-30T02:57:43.801379Z"
+    },
+    {
+      "slug": "krypton",
+      "version": "0.3.2",
+      "filename": "krypton-0.3.2.jar",
+      "url": "https://cdn.modrinth.com/data/fQEb0iXm/versions/UugdIYJw/krypton-0.3.2.jar",
+      "sha512": "d1d57ebd41395b75b01f130cd9503eb8d208212424a399ff9f367f50be8fbc1c6472442b33c686e777c3148f6a609520e8fb732c755157c358cb207fd4d1123a",
+      "sha1": "21b21cb88e412f0bce73b6609de6dd6aca958d7d",
+      "size": 268849,
+      "downloads": 581526,
+      "release": "2026-09-30T05:12:54.012334Z"
+    },
+    {
+      "slug": "lithium",
+      "version": "mc26.3-0.26.3-fabric",
+      "filename": "lithium-fabric-0.26.3+mc26.3.jar",
+      "url": "https://cdn.modrinth.com/data/gvQqBUqZ/versions/fWv5bnZk/lithium-fabric-0.26.3%2Bmc26.3.jar",
+      "sha512": "2ca92fb530135d2baddf0ba4cc4f93976234876a38c4aa02b487b2552400f005afcfbeebf5373fb4396fe2020537a42d7597b8da5a52b904355ef51d5fef07ad",
+      "sha1": "2d3afe9d43bb2549e23479d8d93e644ff366bebf",
+      "size": 919892,
+      "downloads": 1793214,
+      "release": "2026-10-28T22:31:14.497352Z"
+    },
+    {
+      "slug": "modmenu",
+      "version": "21.0.1",
+      "filename": "modmenu-21.0.1.jar",
+      "url": "https://cdn.modrinth.com/data/mOgUt4GM/versions/xckkBHD5/modmenu-21.0.1.jar",
+      "sha512": "d00d52d5342728da13a6237f76c50fc5fd1c62d8112ae4e07726bbc64d2019a76130d6b2968765df81c6499225588eacee6681eebc13c0ada3cad91fc8ab2984",
+      "sha1": "884ab621735264187ccbfc87017cf55bb54d47ee",
+      "size": 862761,
+      "downloads": 1081293,
+      "release": "2026-11-12T11:08:13.487894Z"
+    },
+    {
+      "slug": "particle-rain",
+      "version": "v4.0.4+26.3-fabric",
+      "filename": "particlerain-4.0.4+26.3-fabric.jar",
+      "url": "https://cdn.modrinth.com/data/nrikgvxm/versions/PbaF66N6/particlerain-4.0.4%2B26.3-fabric.jar",
+      "sha512": "8322aa75ec672ae63a4ea78936fd4cb96d8a06c5411bf6d2a76cdbaac1c06ebc7a96cd81125914e91db9f3a1a52e3be0ac8a44d2b5131ab9837a23726bd4206f",
+      "sha1": "090199c3d5763501aa7a1a845ac98cd38713bb36",
+      "size": 631030,
+      "downloads": 28815,
+      "release": "2026-11-19T23:17:37.239096Z"
     },
     {
       "slug": "plasmo-voice",
@@ -143,8 +198,74 @@
       "sha512": "00090edb493fc6b632a6825c765ff797f8469625f2c30a44b8d07d920b6fa7159e6671d585d122d272d2e7a6e6a11f2c1cb5f81cbaf2738354ad80abd9fe8f83",
       "sha1": "f4fd4483284c2aca75bd22d97e39fc85398c05a0",
       "size": 12248022,
-      "downloads": 12606,
+      "downloads": 18322,
       "release": "2026-09-15T20:50:51.355189Z"
+    },
+    {
+      "slug": "3dskinlayers",
+      "version": "1.11.4",
+      "filename": "skinlayers3d-fabric-1.11.4-mc26.3.jar",
+      "url": "https://cdn.modrinth.com/data/zV5r3pPn/versions/gjM2TO0L/skinlayers3d-fabric-1.11.4-mc26.3.jar",
+      "sha512": "1a93ba9f726f8053e111abbe225f67b85e74bdfb78955711218ef103e670bc2c0f011f5911bf725686b79a1b85cecbb1ba733bf1b2eaa2856e53c4f842680627",
+      "sha1": "1eef5b7a4b931c236c117def1c6b867be0443116",
+      "size": 1892299,
+      "downloads": 673083,
+      "release": "2026-10-18T17:15:15.334532Z"
+    },
+    {
+      "slug": "sodium",
+      "version": "mc26.3-0.9.3-beta.1-fabric",
+      "filename": "sodium-fabric-0.9.3-beta.1+mc26.3.jar",
+      "url": "https://cdn.modrinth.com/data/AANobbMI/versions/g6ju16VJ/sodium-fabric-0.9.3-beta.1%2Bmc26.3.jar",
+      "sha512": "884a1ef0ce0e69d565d41a1359070a8d4f8589a086b565540defdb4741985053077dfd0f2a56898ce60510720a9f95dd8ba220a9a6340b6e0cf5cb12352e2419",
+      "sha1": "1e6aec741b4134258ba1d7d458bae96a2e8e187e",
+      "size": 1912496,
+      "downloads": 1093020,
+      "release": "2026-10-15T17:51:44.107526Z"
+    },
+    {
+      "slug": "sound-physics-remastered",
+      "version": "fabric-1.5.4+26.3",
+      "filename": "sound-physics-remastered-fabric-1.5.4+26.3.jar",
+      "url": "https://cdn.modrinth.com/data/qyVF9oeo/versions/29UOgzLw/sound-physics-remastered-fabric-1.5.4%2B26.3.jar",
+      "sha512": "dcd812a812ce04d87dbab0bf24fc42ef6a3ddd8150a98e45c78963bb0bfaf6cba6b9464101cf8a8d4d9551bc4ae0c300913b99715eaff787aba744a3c08317f2",
+      "sha1": "7b5241deca8a6e7a9535cb381ae8fc2da45569a8",
+      "size": 205629,
+      "downloads": 54688,
+      "release": "2026-11-18T07:11:36.370619Z"
+    },
+    {
+      "slug": "viafabric",
+      "version": "0.4.22+186-26.x",
+      "filename": "ViaFabric-0.4.22+186-26.x.jar",
+      "url": "https://cdn.modrinth.com/data/YlKdE5VK/versions/qiAP0t9R/ViaFabric-0.4.22%2B186-26.x.jar",
+      "sha512": "9098d75597b5a91bb50fa80228e729e87ed9aee70e19fda86fdc4c0e73127eaf1b7ece5b71a61149b34d9a8e17c0560f4be0d6c15537e7361d20e0fd641b6f4e",
+      "sha1": "be321e1e3215e8cc6b29270365afd9550dd5e788",
+      "size": 5914365,
+      "downloads": 19418,
+      "release": "2026-10-02T15:07:22.744328Z"
+    },
+    {
+      "slug": "visuality",
+      "version": "0.7.15+26.3",
+      "filename": "visuality-0.7.15+26.3.jar",
+      "url": "https://cdn.modrinth.com/data/rI0hvYcd/versions/BNe9kpJ7/visuality-0.7.15%2B26.3.jar",
+      "sha512": "90145cad547d329d5134eabbf45c7f35b1d0ce3ff2bcef8a1b187dc33723121b1a235c0cc259043588835b0cb7b31cba4aa84d738be810f0ea073308bec2eb4a",
+      "sha1": "9c6c1554114150464716b8a82da8a8872ea3db8e",
+      "size": 81970,
+      "downloads": 552567,
+      "release": "2026-09-20T11:39:02.978375Z"
+    },
+    {
+      "slug": "yacl",
+      "version": "3.9.7+26.3-fabric",
+      "filename": "yet_another_config_lib_v3-3.9.7+26.3-fabric.jar",
+      "url": "https://cdn.modrinth.com/data/1eAoo2KR/versions/s9SjoFu1/yet_another_config_lib_v3-3.9.7%2B26.3-fabric.jar",
+      "sha512": "f3957028dd31cae78f08aee3e768f61bd12c4c8423257d357bc3c1a2172047c769d37901f99775c7ffff1e5ee794025dc72738b2869cab06f1c2811841d68b24",
+      "sha1": "e54d86dd4a78f95cd6ec0309d96fae01e661c00d",
+      "size": 1125377,
+      "downloads": 3074573,
+      "release": "2026-09-20T23:11:34.251964Z"
     }
   ]
 }
