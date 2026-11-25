@@ -21,26 +21,27 @@ Dépôt : [`artlab-org/6ix7even-modpack`](https://github.com/artlab-org/6ix7even
 1. [Pré-requis](#pré-requis)
 2. [Installation rapide (automatique)](#installation-rapide-automatique)
 3. [Installation manuelle](#installation-manuelle)
-4. [Liens Modrinth (téléchargement direct)](#liens-modrinth-pour-téléchargement-direct)
+4. [Liens Modrinth (pour téléchargement direct)](#liens-modrinth-pour-téléchargement-direct)
 5. [Pack Modrinth (.mrpack)](#pack-modrinth-mrpack)
-6. [Accès au serveur](#accès-au-serveur)
-7. [Chat vocal (proximité)](#chat-vocal-proximité)
-8. [Compatibilité launcher](#compatibilité-launcher)
-9. [Upgrade](#upgrade)
-10. [Notes](#notes)
+6. [Ressources, shaders et configs embarqués](#ressources-shaders-et-configs-embarqués)
+7. [Accès au serveur](#accès-au-serveur)
+8. [Chat vocal (proximité)](#chat-vocal-proximité)
+9. [Compatibilité launcher](#compatibilité-launcher)
+10. [Upgrade](#upgrade)
+11. [Notes](#notes)
 
 ---
 
 ## Pré-requis
 
-- **Java 21 ou plus récent** (MC 26.3 utilise Java 25 LTS)
+- **Java 25 ou plus récent** (MC 26.3 utilise Java 25 LTS)
 - **Minecraft Java Edition 26.3** installé via ton launcher
 - Un des launchers suivants :
   - **Minecraft Launcher officiel** (Microsoft)
   - **TLauncher** (crack)
   - **SKLauncher** (crack)
   - **MultiMC / Prism Launcher** (open-source)
-- 1 GB d'espace disque (mods = ~62 Mio pour les 13 `.jar` du modpack)
+- ~1 Go d'espace disque (24 mods = ~74 Mio, + ~147 Mio de resource packs et ~5 Mio de shader packs)
 - 4 GB RAM alloués au jeu (recommandé 6 GB pour Distant Horizons)
 
 ---
@@ -117,7 +118,7 @@ Si tu préfères installer les mods à la main (ou si l'install auto ne marche p
 ### Étape 1 — Installer Fabric Loader 0.19.5
 
 1. Télécharge [fabric-installer.jar](https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.19.5/fabric-loader-0.19.5.jar)
-2. Lance-le avec Java 21+ :
+2. Lance-le avec Java 25+ :
    ```bash
    java -jar fabric-installer.jar client -mcversion 26.3 -loader 0.19.5
    ```
@@ -131,7 +132,7 @@ Va sur [Modrinth](https://modrinth.com), cherche chaque mod, vérifie la compati
 
 ### Étape 3 — Copier les mods
 
-Copie les 13 fichiers `.jar` dans ton dossier `.minecraft/mods/` (dont `plasmovoice-fabric-26.3-2.1.17.jar` pour le chat vocal) :
+Copie les 24 fichiers `.jar` dans ton dossier `.minecraft/mods/` (dont `plasmovoice-fabric-26.3-2.1.17.jar` pour le chat vocal) :
 
 | OS | Chemin typique |
 |---|---|
@@ -152,29 +153,38 @@ Copie les 13 fichiers `.jar` dans ton dossier `.minecraft/mods/` (dont `plasmovo
 
 Tous les mods ont été téléchargés depuis **Modrinth** (CDN officiel). Tu peux vérifier chaque SHA512 sur la page Modrinth du mod.
 
-| Mod | Version | Taille |
-|---|---|---:|
-| [fabric-api](https://modrinth.com/mod/fabric-api) | 0.163.0+26.3 | 1,774,707 bytes |
-| [sodium](https://modrinth.com/mod/sodium) | mc26.3-0.9.3-beta.1-fabric | 1,912,496 bytes |
-| [iris](https://modrinth.com/mod/iris) | 1.11.7+26.3-fabric | 2,850,938 bytes |
-| [lithium](https://modrinth.com/mod/lithium) | mc26.3-0.26.2-fabric | 914,543 bytes |
-| [ferrite-core](https://modrinth.com/mod/ferrite-core) | 9.0.0-fabric | 72,677 bytes |
-| [krypton](https://modrinth.com/mod/krypton) | 0.3.2 | 268,849 bytes |
-| [modmenu](https://modrinth.com/mod/modmenu) | 21.0.0 | 856,779 bytes |
-| [cloth-config](https://modrinth.com/mod/cloth-config) | 26.3.159+fabric | 1,135,009 bytes |
-| [distanthorizons](https://modrinth.com/mod/distanthorizons) | 3.3.4-26.3 | 28,476,894 bytes |
-| [fabric-language-kotlin](https://modrinth.com/mod/fabric-language-kotlin) | 1.14.2+kotlin.2.4.21 | 8,142,878 bytes |
-| [viafabric](https://modrinth.com/mod/viafabric) | 0.4.22+186-26.x | 5,914,365 bytes |
-| [chunky](https://modrinth.com/mod/chunky) | 1.5.3 | 354,095 bytes |
-| [easyauth](https://modrinth.com/mod/easyauth) | 3.4.4 | 24,257,433 bytes |
-| [vanish](https://modrinth.com/mod/vanish) | 1.6.16+26.3 | 1,256,413 bytes |
-| [plasmo-voice](https://modrinth.com/mod/plasmo-voice) | 2.1.17 (`fabric-26.3-2.1.17`) | 12,248,022 bytes |
+| Mod | Version | `version_id` Modrinth | Taille |
+|---|---|---|---:|
+| [Better Autoclicker](https://modrinth.com/mod/better-autoclicker) | `1.4.4+mc26.3` | `6pYrIgDv` | 69 375 octets |
+| [Chat Heads](https://modrinth.com/mod/chat-heads) | `1.3.3` | `9O2ZSOkh` | 98 703 octets |
+| [Chunky](https://modrinth.com/mod/chunky) | `1.5.66` | `86FKD9qx` | 442 176 octets |
+| [Cloth Config](https://modrinth.com/mod/cloth-config) | `26.3.159+fabric` | `fg2uyxOW` | 1 135 009 octets |
+| [Continuity](https://modrinth.com/mod/continuity) | `3.0.1+26.3` | `Jt2sCWTQ` | 1 002 033 octets |
+| [Controlify](https://modrinth.com/mod/controlify) | `3.5.3+mc26.3` | `fo76vL20` | 6 410 187 octets |
+| [Distant Horizons](https://modrinth.com/mod/distanthorizons) | `3.3.4-26.3` | `TGgEbP9A` | 28 476 894 octets |
+| [Entity Model Features](https://modrinth.com/mod/entity-model-features) | `3.3.12-fabric-26.3` | `vF6qLXsA` | 665 386 octets |
+| [Entity Texture Features](https://modrinth.com/mod/entitytexturefeatures) | `7.2.7-fabric-26.3` | `svwZ2o4d` | 798 322 octets |
+| [Fabric API](https://modrinth.com/mod/fabric-api) | `0.166.2+26.3` | `Zns5SSRA` | 1 797 523 octets |
+| [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) | `1.14.2+kotlin.2.4.21` | `SKW1BTL3` | 8 142 878 octets |
+| [FerriteCore](https://modrinth.com/mod/ferrite-core) | `9.0.0-fabric` | `d5ddUdiB` | 72 677 octets |
+| [Iris](https://modrinth.com/mod/iris) | `1.11.7+26.3-fabric` | `vTN4NRGW` | 2 850 938 octets |
+| [Krypton](https://modrinth.com/mod/krypton) | `0.3.2` | `UugdIYJw` | 268 849 octets |
+| [Lithium](https://modrinth.com/mod/lithium) | `mc26.3-0.26.3-fabric` | `fWv5bnZk` | 919 892 octets |
+| [Mod Menu](https://modrinth.com/mod/modmenu) | `21.0.1` | `xckkBHD5` | 862 761 octets |
+| [Particle Rain](https://modrinth.com/mod/particle-rain) | `v4.0.4+26.3-fabric` | `PbaF66N6` | 631 030 octets |
+| [Plasmo Voice](https://modrinth.com/mod/plasmo-voice) | `fabric-26.3-2.1.17` | `vKP6gBRn` | 12 248 022 octets |
+| [3D Skin Layers](https://modrinth.com/mod/3dskinlayers) | `1.11.4` | `gjM2TO0L` | 1 892 299 octets |
+| [Sodium](https://modrinth.com/mod/sodium) | `mc26.3-0.9.3-beta.1-fabric` | `g6ju16VJ` | 1 912 496 octets |
+| [Sound Physics Remastered](https://modrinth.com/mod/sound-physics-remastered) | `fabric-1.5.4+26.3` | `29UOgzLw` | 205 629 octets |
+| [ViaFabric](https://modrinth.com/mod/viafabric) | `0.4.22+186-26.x` | `qiAP0t9R` | 5 914 365 octets |
+| [Visuality](https://modrinth.com/mod/visuality) | `0.7.15+26.3` | `BNe9kpJ7` | 81 970 octets |
+| [YetAnotherConfigLib](https://modrinth.com/mod/yacl) | `3.9.7+26.3-fabric` | `s9SjoFu1` | 1 125 377 octets |
 
-> Ce tableau liste 15 mods : les **13 mods client** — exactement la liste installée par `install.sh` / `install.ps1`, à copier dans `.minecraft/mods/` — plus `easyauth` et `vanish`, qui tournent **côté serveur** (voir [Compatibilité serveur](#compatibilité-serveur)) et ne sont pas installés par les scripts client.
+> Ce tableau liste les **24 mods client** du pack — exactement la liste installée par `install.sh` / `install.ps1` et embarquée dans le `.mrpack` (index : 24 entrées). Les mods **serveur** (`easyauth`, `vanish`) ne sont **pas** dans le pack client (voir [Compatibilité serveur](#compatibilité-serveur)).
 
 ### Téléchargement manuel en lot
 
-Pour télécharger les **13 mods du modpack** d'un coup (PowerShell) — même liste et même épinglage de version que `install.sh` / `install.ps1` :
+Pour télécharger les **24 mods du modpack** d'un coup (PowerShell) — même liste et même épinglage de version que `install.sh` / `install.ps1` :
 
 ```powershell
 # Prérequis Windows PowerShell 5.1 — identiques à ceux d'install.ps1 :
@@ -186,51 +196,55 @@ try {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 }
 # - User-Agent explicite (l'edge Modrinth rejette le User-Agent PowerShell par défaut)
-$ua = '6ix7even-mc-installer/1.0 (+https://github.com/artlab-org/6ix7even-modpack)'
-
-$mods = @(
-  @{ slug = "fabric-api"; version = "0.163.0+26.3" },
-  @{ slug = "sodium"; version = "mc26.3-0.9.3-beta.1-fabric" },
-  @{ slug = "iris"; version = "1.11.7+26.3-fabric" },
-  @{ slug = "lithium"; version = "mc26.3-0.26.2-fabric" },
-  @{ slug = "ferrite-core"; version = "9.0.0-fabric" },
-  @{ slug = "krypton"; version = "0.3.2" },
-  @{ slug = "modmenu"; version = "21.0.0" },
-  @{ slug = "cloth-config"; version = "26.3.159+fabric" },
-  @{ slug = "distanthorizons"; version = "3.3.4-26.3" },
-  @{ slug = "fabric-language-kotlin"; version = "1.14.2+kotlin.2.4.21" },
-  @{ slug = "viafabric"; version = "0.4.22+186-26.x" },
-  @{ slug = "chunky"; version = "1.5.3" },
-  @{ slug = "plasmo-voice"; version = "fabric-26.3-2.1.17" }
-)
+$ua = '6ix7even-mc-installer/1.1 (+https://github.com/artlab-org/6ix7even-modpack)'
 
 # Versions épinglées (identique à install.sh / install.ps1) :
 # l'API Modrinth renvoie les versions par date décroissante, la 1re peut être
 # une bêta (plasmo-voice 2.2.0-beta.2). On force le version_id stable.
-$pinned = @{ "plasmo-voice" = "vKP6gBRn" }
+$mods = @(
+  @{ slug = "better-autoclicker"; version_id = "6pYrIgDv" },
+  @{ slug = "chat-heads"; version_id = "9O2ZSOkh" },
+  @{ slug = "chunky"; version_id = "86FKD9qx" },
+  @{ slug = "cloth-config"; version_id = "fg2uyxOW" },
+  @{ slug = "continuity"; version_id = "Jt2sCWTQ" },
+  @{ slug = "controlify"; version_id = "fo76vL20" },
+  @{ slug = "distanthorizons"; version_id = "TGgEbP9A" },
+  @{ slug = "entity-model-features"; version_id = "vF6qLXsA" },
+  @{ slug = "entitytexturefeatures"; version_id = "svwZ2o4d" },
+  @{ slug = "fabric-api"; version_id = "Zns5SSRA" },
+  @{ slug = "fabric-language-kotlin"; version_id = "SKW1BTL3" },
+  @{ slug = "ferrite-core"; version_id = "d5ddUdiB" },
+  @{ slug = "iris"; version_id = "vTN4NRGW" },
+  @{ slug = "krypton"; version_id = "UugdIYJw" },
+  @{ slug = "lithium"; version_id = "fWv5bnZk" },
+  @{ slug = "modmenu"; version_id = "xckkBHD5" },
+  @{ slug = "particle-rain"; version_id = "PbaF66N6" },
+  @{ slug = "plasmo-voice"; version_id = "vKP6gBRn" },
+  @{ slug = "3dskinlayers"; version_id = "gjM2TO0L" },
+  @{ slug = "sodium"; version_id = "g6ju16VJ" },
+  @{ slug = "sound-physics-remastered"; version_id = "29UOgzLw" },
+  @{ slug = "viafabric"; version_id = "qiAP0t9R" },
+  @{ slug = "visuality"; version_id = "BNe9kpJ7" },
+  @{ slug = "yacl"; version_id = "s9SjoFu1" }
+)
 
-# Créer le dossier cible s'il n'existe pas (comme install.ps1:251-252) :
+# Créer le dossier cible s'il n'existe pas (comme install.ps1) :
 New-Item -ItemType Directory -Path "$env:APPDATA\.minecraft\mods" -Force | Out-Null
 
 foreach ($mod in $mods) {
-  if ($pinned.ContainsKey($mod.slug)) {
     # Version épinglée : on interroge directement /v2/version/<version_id>
-    $apiUrl = "https://api.modrinth.com/v2/version/$($pinned[$mod.slug])"
+    $apiUrl = "https://api.modrinth.com/v2/version/$($mod.version_id)"
     $version = Invoke-RestMethod -Uri $apiUrl -TimeoutSec 30 -UserAgent $ua
-  } else {
-    $apiUrl = "https://api.modrinth.com/v2/project/$($mod.slug)/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D"
-    $version = (Invoke-RestMethod -Uri $apiUrl -TimeoutSec 30 -UserAgent $ua)[0]
-  }
-  $file = $version.files[0]
-  $out = "$env:APPDATA\.minecraft\mods\$($file.filename)"
-  Write-Host "Téléchargement $($mod.slug) ($($file.filename))..." -ForegroundColor Cyan
-  Invoke-WebRequest -Uri $file.url -OutFile $out -TimeoutSec 120 -UseBasicParsing -UserAgent $ua
-  # Vérification SHA-512 (comme les scripts d'installation du modpack)
-  $actual = (Get-FileHash -Path $out -Algorithm SHA512).Hash.ToLower()
-  if ($actual -ne $file.hashes.sha512.ToLower()) {
-    Remove-Item $out -Force
-    throw "SHA-512 mismatch : $($mod.slug) ($($file.filename))"
-  }
+    $file = $version.files[0]
+    $out = "$env:APPDATA\.minecraft\mods\$($file.filename)"
+    Write-Host "Téléchargement $($mod.slug) ($($file.filename))..." -ForegroundColor Cyan
+    Invoke-WebRequest -Uri $file.url -OutFile $out -TimeoutSec 120 -UseBasicParsing -UserAgent $ua
+    # Vérification SHA-512 (comme les scripts d'installation du modpack)
+    $actual = (Get-FileHash -Path $out -Algorithm SHA512).Hash.ToLower()
+    if ($actual -ne $file.hashes.sha512.ToLower()) {
+        Remove-Item $out -Force
+        throw "SHA-512 mismatch : $($mod.slug) ($($file.filename))"
+    }
 }
 ```
 
@@ -238,67 +252,126 @@ foreach ($mod in $mods) {
 
 ## Pack Modrinth (.mrpack)
 
-Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, version **1.0.0** (Minecraft 26.3, Fabric). Le build **local** produit désormais `dist/6ix7even-1.0.0.mrpack`.
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, **version en cours : 1.1.0** (Minecraft 26.3, Fabric). Le build **local** produit `dist/6ix7even-1.1.0.mrpack`.
 
-> ⚠️ **Artefact DÉJÀ PUBLIÉ : son nom ne change pas.**
+> ⚠️ **La version 1.0.0 reste intacte.**
 > La version Modrinth **1.0.0** (id `MkI0FmNB`) et les releases GitHub [`modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) / [`mrpack-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.0.0) **n'ont pas été republiés** : le fichier publié s'appelle toujours `artlab-client-1.0.0.mrpack` (2 597 o, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3`).
-> **Aucun fichier `6ix7even-1.0.0.mrpack` n'est publié à ce jour** : ce nom désigne **uniquement le build local** produit par `tools/build_mrpack.py`. *Renommage au rebrand du 25 novembre 2026 — republication non faite.*
+> La **1.1.0** est une **nouvelle version** : elle passe de 13 à **24 mods** et ajoute les **13 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** de l'instance de référence. Le fichier de la 1.1.0 s'appelle `6ix7even-1.1.0.mrpack`.
 
 ```bash
-# Génère dist/6ix7even-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
+# Génère dist/6ix7even-1.1.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
 python3 tools/build_mrpack.py
 
 # Point d'entrée unique : génère PUIS valide (code de sortie ≠ 0 si un écart est détecté)
 python3 tools/build_mrpack.py --validate
 
 # Valider un pack déjà construit
-python3 tools/validate_mrpack.py dist/6ix7even-1.0.0.mrpack
+python3 tools/validate_mrpack.py dist/6ix7even-1.1.0.mrpack
+
+# Idem + contrôle en ligne contre l'API Modrinth (sha512 et tailles distants)
+python3 tools/validate_mrpack.py dist/6ix7even-1.1.0.mrpack --online
 ```
 
 Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) — aucune dépendance externe.
 
-Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256**. Après le rebrand du 25 novembre 2026, **deux empreintes coexistent** : celle du build local renommé et celle de l'artefact déjà publié.
+Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256**.
 
 ```text
-# build LOCAL renommé (slug 6ix7even) — mesuré le 25 novembre 2026 sur le mods/manifest.json actuel
+# build 1.1.0 (actuel) — mesuré sur le mods/manifest.json v1.1.0
+552ff3d37275c8b7e321cc3629a73ffc4d134ec8b365b32061df05ddbc1e2306  6ix7even-1.1.0.mrpack
+
+# build 1.0.0 (référence antérieure, local)
 9aa3b8ebda7b58f5a32eadbfd83380938eb8eb80ad72b7e0d227d7c113663345  6ix7even-1.0.0.mrpack
 
 # artefact DÉJÀ PUBLIÉ (nom d'origine inchangé) — version Modrinth 1.0.0 + releases GitHub
 0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3  artlab-client-1.0.0.mrpack
 ```
 
-> Cette empreinte est une **référence de reproductibilité**, pas un contrôle d'intégrité : elle change dès que le manifeste change (un mod, une version ou une URL de plus). Le contrôle d'intégrité, lui, est fait par `tools/validate_mrpack.py`, qui recalcule les empreintes de chaque `.jar` réel.
+> Ces empreintes sont des **références de reproductibilité**, pas des contrôles d'intégrité : elles changent dès que le manifeste change (un mod, une version ou une URL de plus). Le contrôle d'intégrité, lui, est fait par `tools/validate_mrpack.py`, qui recalcule les empreintes de chaque `.jar` réel.
 
-Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et 13 entrées `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`). Un dossier `overrides/` n'est ajouté **que** si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel. Les `.jar` ne sont pas embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
+Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId` `1.1.0`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et **24 entrées** `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`).
+
+Le dossier `overrides/` est présent et contient **45 fichiers** :
+
+| Dossier | Contenu | Nombre |
+|---|---|---:|
+| `overrides/config/` | configurations des mods (Distant Horizons, Iris, Sodium, Lithium, Plasmo Voice, Mod Menu, YACL, …) | 27 fichiers |
+| `overrides/resourcepacks/` | resource packs de l'instance de référence | 13 fichiers |
+| `overrides/shaderpacks/` | shader packs de l'instance de référence | 4 packs (+ 1 `.txt`) |
+
+Les `.jar` ne sont **pas** embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
 
 `tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances, vérifie qu'il y a une entrée par mod du manifeste et que chaque URL suit la forme `https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>`, et sort en code 1 au moindre écart. Un contrôle supplémentaire de l'API Modrinth (`GET /v2/version/<version_id>`, sha512 et taille distants) est disponible via `--online` ; sans ce drapeau, la validation reste **hors ligne et déterministe**.
 
-**Installation** : importer `dist/6ix7even-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack. Une fois la modération Modrinth validée, la [page du projet](https://modrinth.com/modpack/6ix7even) permettra en plus l'installation en un clic depuis le launcher.
+**Installation** : importer `dist/6ix7even-1.1.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5, les 24 mods du pack, et dépose les resource packs, shader packs et configs dans l'instance. Une fois la modération Modrinth validée, la [page du projet](https://modrinth.com/modpack/6ix7even) permettra en plus l'installation en un clic depuis le launcher.
 
 | Launcher | Import `.mrpack` | Comment faire |
 |---|---|---|
-| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/6ix7even-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
-| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/6ix7even-1.0.0.mrpack` |
-| **Minecraft Launcher officiel** (Microsoft) | ❌ | Le launcher officiel sait utiliser un **profil Fabric** (voir [Compatibilité launcher](#compatibilité-launcher)) mais **n'importe pas** de `.mrpack` : utilise le Modrinth App, ou l'[installation manuelle](#installation-manuelle) des 13 `.jar` |
-| **TLauncher** / **SKLauncher** | ⚠️ non couvert | Leur gestion des mods est **propriétaire** et hors du périmètre de ce pack : pour rester aligné sur le pack, utilise le **Modrinth App** ou l'installation manuelle des 13 `.jar` |
+| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/6ix7even-1.1.0.mrpack` (les libellés du menu varient selon la version de l'app) |
+| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/6ix7even-1.1.0.mrpack` |
+| **Minecraft Launcher officiel** (Microsoft) | ❌ | Le launcher officiel sait utiliser un **profil Fabric** (voir [Compatibilité launcher](#compatibilité-launcher)) mais **n'importe pas** de `.mrpack` : utilise le Modrinth App, ou l'[installation manuelle](#installation-manuelle) des 24 `.jar` |
+| **TLauncher** / **SKLauncher** | ⚠️ non couvert | Leur gestion des mods est **propriétaire** et hors du périmètre de ce pack : pour rester aligné sur le pack, utilise le **Modrinth App** ou l'installation manuelle des 24 `.jar` |
 
-> Ce tableau décrit uniquement l'**import du fichier `.mrpack`**. Les 13 `.jar` restent installables à la main dans n'importe quel launcher ([Liens Modrinth](#liens-modrinth-pour-téléchargement-direct)).
+> Ce tableau décrit uniquement l'**import du fichier `.mrpack`**. Les 24 `.jar` restent installables à la main dans n'importe quel launcher ([Liens Modrinth](#liens-modrinth-pour-téléchargement-direct)).
 
-**Import manuel du fichier** : le `.mrpack` est une **archive ZIP** — tu peux l'ouvrir, lire `modrinth.index.json` et en tirer la liste des 13 mods avec leur URL de téléchargement et leurs empreintes, puis les installer à la main comme indiqué dans [Liens Modrinth](#liens-modrinth-pour-téléchargement-direct) :
+**Import manuel du fichier** : le `.mrpack` est une **archive ZIP** — tu peux l'ouvrir, lire `modrinth.index.json` et en tirer la liste des 24 mods avec leur URL de téléchargement et leurs empreintes, puis les installer à la main comme indiqué dans [Liens Modrinth](#liens-modrinth-pour-téléchargement-direct) :
 
 ```bash
 # Le .mrpack est un ZIP : l'index se lit sans installer le pack
-unzip -p dist/6ix7even-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
+unzip -p dist/6ix7even-1.1.0.mrpack modrinth.index.json | python3 -m json.tool
 ```
 
 > Le dossier `dist/` est ignoré par Git (`.gitignore`) : le `.mrpack` n'est **pas versionné**. Il est produit à la demande par la commande ci-dessus, ou fourni en pièce jointe par le canal de distribution du projet.
+
+---
+
+## Ressources, shaders et configs embarqués
+
+Depuis la **1.1.0**, le `.mrpack` embarque le contenu visuel et la configuration de l'instance de référence (profil AstralRinth `artlab-client-1.0.0`).
+
+### Resource packs (13)
+
+| Fichier | Taille |
+|---|---:|
+| `Better-Leaves-9.6.zip` | 1 977 146 octets |
+| `Default HD 128x Demo 1.8.2.7.zip` | 16 876 419 octets |
+| `Default-Dark-Mode-26.3-2026.9.0.zip` | 761 869 octets |
+| `Dramatic Skys Demo 1.5.3.36.6.zip` | 13 912 171 octets |
+| `Enhanced Audio r7.zip` | 18 977 120 octets |
+| `FA+All_Extensions-v1.10.1.zip` | 548 952 octets |
+| `FA+Player-v1.1.zip` | 110 203 octets |
+| `Faithful 64x - Release 15.zip` | 19 411 638 octets |
+| `Fresh Food.zip` | 1 396 587 octets |
+| `FreshAnimations_v1.11.2_26.1+.zip` | 778 725 octets |
+| `Patrix_26.3_32x_basic.zip` | 76 017 425 octets |
+| `Recolourful Containers 3.1.4 (1.19.4+).zip` | 2 011 177 octets |
+| `§a§lVocal Villagers §r§71.5.zip` | 1 148 267 octets |
+
+### Shader packs (4)
+
+| Fichier | Taille |
+|---|---:|
+| `ComplementaryReimagined_r5.8.zip` | 544 613 octets |
+| `ComplementaryUnbound_r5.9.3.zip` | 553 400 octets |
+| `MakeUp-UltraFast-9.5g.zip` | 405 096 octets |
+| `photon_v1.4.zip` | 3 857 333 octets |
+
+> `ComplementaryReimagined_r5.8.zip.txt` accompagne le shader pack (note de l'auteur) et est embarqué lui aussi.
+
+### Configs (27 fichiers)
+
+`config/` embarque les réglages de l'instance de référence : `DistantHorizons.toml`, `ViaFabric/viafabric.yml`, `ViaFabric/viaversion.yml`, `auto-clicker-fabric.json`, `chat_heads.json5`, `chunky/config.json`, `continuity.json`, `entity_model_features.json`, `entity_texture_features.json`, `ferritecore.mixin.properties`, `iris-excluded.json`, `iris.properties`, `lithium.properties`, `modmenu.json`, `particlerain/config.json`, `plasmovoice/client.toml`, `skinlayers.json`, `sodium-mixins.properties`, `sodium-options.json`, `sound_physics_remastered/` (4 fichiers), `transition.json`, `trender.json`, `visuality.json`, `yacl.json5`.
+
+Les réglages **spécifiques à une machine** (empreinte Sodium, cache Plasmo Voice, tâches Chunky du monde, configuration Controlify) sont **volontairement exclus** : le pack reste portable d'une machine à l'autre.
+
+> ⚠️ Les resource packs et shader packs sont **à activer** dans les options du jeu (ressources → packs activés) : ils sont installés mais pas activés automatiquement. Les configs, elles, s'appliquent dès le premier lancement.
 
 ### Client-only : ce que le pack installe — et ce qu'il ne contient pas
 
 Ce pack est **client-only** : il n'installe que ce qui tourne **chez le joueur**.
 
-- **Installé par le pack** : Minecraft 26.3, Fabric Loader 0.19.5 et les **13 mods client** (Fabric API, Sodium, Iris, Lithium, FerriteCore, Krypton, Mod Menu, Cloth Config, Distant Horizons, Fabric Language Kotlin, ViaFabric, Chunky, Plasmo Voice).
-- **Non installé par le pack** : la **configuration serveur** — `server.properties`, la liste des joueurs, la whitelist et les données du monde ne sont **pas** dans le `.mrpack`. Un dossier `overrides/` n'est embarqué que si `config/`, `resourcepacks/` ou `shaderpacks/` contiennent du contenu réel ; à ce jour ces dossiers ne contiennent que des `.gitkeep`, donc **le pack ne contient que `modrinth.index.json`** (13 entrées, 7 458 octets).
+- **Installé par le pack** : Minecraft 26.3, Fabric Loader 0.19.5, les **24 mods client** (Fabric API, Sodium, Iris, Lithium, FerriteCore, Krypton, Mod Menu, Cloth Config, Distant Horizons, Fabric Language Kotlin, ViaFabric, Chunky, Plasmo Voice, Continuity, Controlify, Better Autoclicker, Chat Heads, Entity Model Features, Entity Texture Features, Particle Rain, 3D Skin Layers, Sound Physics Remastered, Visuality, YetAnotherConfigLib), les **13 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** (voir [Ressources, shaders et configs embarqués](#ressources-shaders-et-configs-embarqués)).
+- **Non installé par le pack** : la **configuration serveur** — `server.properties`, la liste des joueurs, la whitelist et les données du monde ne sont **pas** dans le `.mrpack`. Le dossier `overrides/` ne contient que du **contenu client** (configs, resource packs, shader packs) : **le pack ne contient aucun réglage serveur**.
 - **Mods côté serveur** : EasyAuth et Vanish tournent **sur le serveur**, pas dans le pack client (voir [Compatibilité serveur](#compatibilité-serveur)).
 
 Dans l'index, chaque mod est marqué `env: {client: required, server: unsupported}` : le pack ne peut pas être installé sur un serveur, et rien n'y est installé par erreur.
@@ -360,7 +433,7 @@ Le modpack installe **Plasmo Voice 2.1.17** (`plasmovoice-fabric-26.3-2.1.17.jar
 
 ### Comment vérifier que le mod est chargé
 
-1. **Mod Menu** (le modpack contient Mod Menu 21.0.0) : dans le menu principal, ouvre **Mods** → la liste doit contenir **Plasmo Voice**, version **2.1.17**. C'est le contrôle le plus rapide.
+1. **Mod Menu** (le modpack contient Mod Menu 21.0.1) : dans le menu principal, ouvre **Mods** → la liste doit contenir **Plasmo Voice**, version **2.1.17**. C'est le contrôle le plus rapide.
 2. **Dossier des mods** : le fichier `plasmovoice-fabric-26.3-2.1.17.jar` doit être présent dans `.minecraft/mods/` (ou `versions/<ton_profil>/mods/`).
 3. **Log de lancement** : dans `logs/latest.log`, cherche `plasmovoice` — le mod doit apparaître dans les lignes de chargement.
 
@@ -386,7 +459,7 @@ Si tu installes **à la main**, prends le fichier direct :
 SHA-512 : `00090edb493fc6b632a6825c765ff797f8469625f2c30a44b8d07d920b6fa7159e6671d585d122d272d2e7a6e6a11f2c1cb5f81cbaf2738354ad80abd9fe8f83`
 Lien CDN direct : `https://cdn.modrinth.com/data/1bZhdhsH/versions/vKP6gBRn/plasmovoice-fabric-26.3-2.1.17.jar`
 
-> Le script de téléchargement en lot de la section [Liens Modrinth](#liens-modrinth-pour-téléchargement-direct) installe bien les **13 mods**, `plasmo-voice` compris : il l'épingle sur `vKP6gBRn` (`fabric-26.3-2.1.17`), donc **jamais** sur la bêta `2.2.0-beta.2`. Pour installer le mod de voix à la main, prends le **lien direct** ci-dessus.
+> Le script de téléchargement en lot de la section [Liens Modrinth](#liens-modrinth-pour-téléchargement-direct) installe bien les **24 mods**, `plasmo-voice` compris : il l'épingle sur `vKP6gBRn` (`fabric-26.3-2.1.17`), donc **jamais** sur la bêta `2.2.0-beta.2`. Pour installer le mod de voix à la main, prends le **lien direct** ci-dessus.
 
 ---
 
@@ -415,6 +488,8 @@ Pour mettre à jour un mod :
 
 Les **SHA512** sont vérifiés par le script d'install automatique pour éviter les corruptions.
 
+**Depuis la 1.1.0** : le pack contient 24 mods, les resource packs, les shader packs et les configs. Pour tout mettre à jour d'un coup, réimporte `dist/6ix7even-1.1.0.mrpack` dans le launcher (ou relance `install.sh` / `install.ps1`).
+
 ---
 
 ## Notes
@@ -437,7 +512,7 @@ Pas de mod Fabric dédié compatible MC 26.3 à ce jour. Tu peux utiliser **Cryi
 
 ### Java 25 LTS
 
-MC 26.3 utilise Java 25 LTS. Si ton launcher propose une option « Java version », choisis Java 21+ (de préférence Java 25).
+MC 26.3 utilise Java 25 LTS. Si ton launcher propose une option « Java version », choisis **Java 25**.
 
 ---
 
@@ -473,9 +548,9 @@ Vérification : le serveur tourne en MC **26.3 protocol 777**. Si tu essaies 26.
 
 MC 26.3 utilise Java 25 LTS. Si ton launcher utilise Java 8 ou 11 (par défaut sur Windows), Java crash.
 
-**Vérification** : ouvre un terminal et tape `java -version`. Tu dois voir Java 21+ (idéalement 25).
+**Vérification** : ouvre un terminal et tape `java -version`. Tu dois voir **Java 25**.
 
-**Fix** : dans le launcher Mojang → **Installations** → choisis ton profil Fabric → **Edit** → **Java version** → change vers 21+ (bouton "..." à droite du champ Java executable). Si Java 21+ n'est pas listé, installe-le via Adoptium (https://adoptium.net/) et pointe le launcher vers le chemin complet (`C:\Program Files\Eclipse Adoptium\jdk-25.0.4.1-hotspot\bin\javaw.exe`).
+**Fix** : dans le launcher Mojang → **Installations** → choisis ton profil Fabric → **Edit** → **Java version** → change vers **25** (bouton "..." à droite du champ Java executable). Si **Java 25** n'est pas listé, installe-le via Adoptium (https://adoptium.net/) et pointe le launcher vers le chemin complet (`C:\Program Files\Eclipse Adoptium\jdk-25.0.4.1-hotspot\bin\javaw.exe`).
 
 ### 3. Fabric Loader pas installé ou mauvaise version (cause #3)
 
@@ -483,7 +558,7 @@ Le modpack a besoin de **Fabric Loader 0.19.5**. Si tu utilises un profil vanill
 
 1. Va sur https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.19.5/fabric-loader-0.19.5.jar
 2. Télécharge `fabric-loader-0.19.5.jar`
-3. Lance-le avec Java 21+ : `java -jar fabric-loader-0.19.5.jar client -mcversion 26.3 -loader 0.19.5`
+3. Lance-le avec Java 25+ : `java -jar fabric-loader-0.19.5.jar client -mcversion 26.3 -loader 0.19.5`
 4. Sélectionne ton profil MC 26.3, clique **Install**
 
 Ou via MultiMC/Prism : ajoute une instance "Fabric" depuis le launcher, sélectionne version 26.3, installe, mets les mods dans `.minecraft/mods/`.
@@ -509,8 +584,31 @@ irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.p
 
 OU manuellement :
 1. Va dans `versions\<ton_profil_fabric>\mods\`
-2. Supprime tous les .jar qui ne sont PAS dans la liste de mon modpack (13 mods) :
-   `fabric-api`, `sodium`, `iris`, `lithium`, `ferrite-core`, `krypton`, `modmenu`, `cloth-config`, `distanthorizons`, `fabric-language-kotlin`, `viafabric`, `chunky`, `plasmo-voice`
+2. Supprime tous les .jar qui ne sont PAS dans la liste de mon modpack (24 mods) :
+   `betterAutoclicker-fabric-1.4.4+mc26.3.jar`
+   `chat_heads-1.3.3-fabric-26.3.jar`
+   `Chunky-Fabric-1.5.66.jar`
+   `cloth-config-fabric-26.3.159.jar`
+   `continuity-3.0.1+26.3.jar`
+   `controlify-3.5.3+mc26.3-universal.jar`
+   `DistantHorizons-3.3.4-26.3-fabric-neoforge.jar`
+   `entity_model_features-3.3.12-26.3-fabric.jar`
+   `entity_texture_features-7.2.7-26.3-fabric.jar`
+   `fabric-api-0.166.2+26.3.jar`
+   `fabric-language-kotlin-1.14.2+kotlin.2.4.21.jar`
+   `ferritecore-9.0.0-fabric.jar`
+   `iris-fabric-1.11.7+mc26.3.jar`
+   `krypton-0.3.2.jar`
+   `lithium-fabric-0.26.3+mc26.3.jar`
+   `modmenu-21.0.1.jar`
+   `particlerain-4.0.4+26.3-fabric.jar`
+   `plasmovoice-fabric-26.3-2.1.17.jar`
+   `skinlayers3d-fabric-1.11.4-mc26.3.jar`
+   `sodium-fabric-0.9.3-beta.1+mc26.3.jar`
+   `sound-physics-remastered-fabric-1.5.4+26.3.jar`
+   `ViaFabric-0.4.22+186-26.x.jar`
+   `visuality-0.7.15+26.3.jar`
+   `yet_another_config_lib_v3-3.9.7+26.3-fabric.jar`
 3. Relance MC
 
 Note : `ViaFabric` a 2 versions (`viafabric` pour 26.3 et `viafabric-mc26-1` pour 26.1). Tu dois garder uniquement la version **26.3**.
