@@ -252,7 +252,7 @@ foreach ($mod in $mods) {
 
 ## Pack Modrinth (.mrpack)
 
-Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, **version publiée : 1.1.0** (Minecraft 26.3, Fabric), disponible sur le CDN Modrinth et en release GitHub. Le build **local** produit `dist/6ix7even-1.1.0.mrpack`.
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, **version publiée : 1.1.0** (Minecraft 26.3, Fabric), disponible sur le CDN Modrinth et en release GitHub. Le build **local** produit `dist/6ix7even-1.1.0.mrpack`. Depuis le commit de versionnement, ce fichier — **identique octet pour octet** à la version Modrinth `eCYn2UJh` et à l'asset de la release `mrpack-v1.1.0` — est **versionné dans le dépôt** (`dist/6ix7even-1.1.0.mrpack`, 22 575 641 o) : le dépôt est donc la source de vérité de l'artefact distribué, et son contenu peut être contrôlé sans download.
 
 > ⚠️ **La version 1.0.0 reste intacte.**
 > La version Modrinth **1.0.0** (id `MkI0FmNB`) et les releases GitHub [`modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) / [`mrpack-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.0.0) **n'ont pas été republiés** : le fichier publié s'appelle toujours `artlab-client-1.0.0.mrpack` (2 597 o, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3`).
@@ -326,7 +326,7 @@ Les `.jar` ne sont **pas** embarqués : le launcher les télécharge depuis `cdn
 unzip -p dist/6ix7even-1.1.0.mrpack modrinth.index.json | python3 -m json.tool
 ```
 
-> Le dossier `dist/` est ignoré par Git (`.gitignore`) : le `.mrpack` n'est **pas versionné**. Il est produit à la demande par la commande ci-dessus, ou fourni en pièce jointe par le canal de distribution du projet.
+> Le pack **publié** est **versionné dans le dépôt** : `dist/6ix7even-1.1.0.mrpack` (22 575 641 o, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb`), **identique** à la version Modrinth `eCYn2UJh` et à l'asset de la release GitHub `mrpack-v1.1.0`. Les autres builds de `dist/` restent ignorés par Git (`.gitignore`) : ils sont produits à la demande par la commande ci-dessus.
 
 ---
 
