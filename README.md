@@ -252,7 +252,7 @@ foreach ($mod in $mods) {
 
 ## Pack Modrinth (.mrpack)
 
-Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, **version en cours : 1.1.0** (Minecraft 26.3, Fabric). Le build **local** produit `dist/6ix7even-1.1.0.mrpack`.
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, **version publiée : 1.1.0** (Minecraft 26.3, Fabric), disponible sur le CDN Modrinth et en release GitHub. Le build **local** produit `dist/6ix7even-1.1.0.mrpack`.
 
 > ⚠️ **La version 1.0.0 reste intacte.**
 > La version Modrinth **1.0.0** (id `MkI0FmNB`) et les releases GitHub [`modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) / [`mrpack-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.0.0) **n'ont pas été republiés** : le fichier publié s'appelle toujours `artlab-client-1.0.0.mrpack` (2 597 o, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3`).
@@ -260,7 +260,8 @@ Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depu
 
 > 📦 **Publication de la 1.1.0 (25 novembre 2026)**
 > - **Release GitHub [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0)** — asset `6ix7even-1.1.0.mrpack`, **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb` (identique au build local). Téléchargement : <https://github.com/artlab-org/6ix7even-modpack/releases/download/mrpack-v1.1.0/6ix7even-1.1.0.mrpack>
-> - **Version Modrinth 1.1.0** : **pas encore publiée** — le jeton d'API Modrinth disponible dans Vault est refusé par l'API (`401 invalid_credentials` sur `POST /v3/version`). Un jeton renouvelé est nécessaire pour créer la version ; **la 1.0.0 n'est pas modifiée** d'ici là.
+> - **Version Modrinth 1.1.0** : **publiée** (25 novembre 2026) — id version **`eCYn2UJh`**, `status=listed`, `loaders=["mrpack"]`, `mrpack_loaders=["fabric"]`, `game_versions=["26.3"]`, `environment=client_only`, **24 dépendances `embedded`**. Le fichier publié est **le même octet pour octet** que la release GitHub : **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb`. CDN : <https://cdn.modrinth.com/data/Y6UiohXZ/versions/eCYn2UJh/6ix7even-1.1.0.mrpack>
+> - **Modération Modrinth en cours** (`status=processing`, `in_review=true`) : la page <https://modrinth.com/modpack/6ix7even> affiche encore « Project not found » en accès anonyme et l'installation en un clic n'est pas encore possible — le CDN sert déjà les deux versions. **La 1.0.0 n'a pas été modifiée** (`MkI0FmNB`, `listed`, 2 597 o).
 
 ```bash
 # Génère dist/6ix7even-1.1.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
@@ -392,7 +393,7 @@ Projet Modrinth `6ix7even` (id `Y6UiohXZ`), publié sous l'**organisation** id `
 
 La version **1.0.0** (id `MkI0FmNB`, `release`) y est publiée avec le fichier `artlab-client-1.0.0.mrpack` (**2 597 o**, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3` — identique à la release GitHub) : **le nom du fichier publié n'a pas changé** au rebrand du 25 novembre 2026, la republication n'a pas été faite. Le projet est **soumis à la modération Modrinth** (`status: processing`) : tant que la validation n'est pas faite, la page affiche « Project not found » et le projet n'apparaît pas encore dans les listes. D'ici là, le `.mrpack` reste téléchargeable depuis la [release GitHub `modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) — sous son nom d'origine, `artlab-client-1.0.0.mrpack`.
 
-La version **1.1.0** est, elle, **publiée sur GitHub** : release [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0), asset `6ix7even-1.1.0.mrpack`, **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb` — le même fichier que le build local. Sa **publication sur Modrinth est en attente** (jeton d'API à renouveler) : la page ci-dessus ne l'expose pas encore.
+La version **1.1.0** est publiée **sur GitHub et sur Modrinth** : release [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0) et version Modrinth **`eCYn2UJh`** (`status=listed`), **le même fichier des deux côtés** — `6ix7even-1.1.0.mrpack`, **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb` — identique au build local. CDN : <https://cdn.modrinth.com/data/Y6UiohXZ/versions/eCYn2UJh/6ix7even-1.1.0.mrpack>. La **page du projet** reste en attente de modération Modrinth (`status=processing`) : « Project not found » en accès anonyme tant que le projet n'est pas approuvé — sans impact sur le téléchargement des `.mrpack`.
 
 ---
 
