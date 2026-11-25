@@ -2,7 +2,9 @@
 /config/*.json.bak
 
 # Builds locaux (packs .mrpack generes)
-/dist/
+/dist/*
+# ... sauf le pack publie 1.1.0, versionne pour garantir l'artefact publie
+!/dist/6ix7even-1.1.0.mrpack
 
 # OS
 .DS_Store
