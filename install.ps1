@@ -1,9 +1,9 @@
-# artlab MC modpack install script (Windows PowerShell)
+# 6ix7even MC modpack install script (Windows PowerShell)
 # Usage:
-#   irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 | iex
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Launcher auto -Clean
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Launcher sklauncher -Version 26.3
-#   powershell -ExecutionPolicy Bypass -File install.ps1 -Launcher multimc -Instance "artlab"
+#   powershell -ExecutionPolicy Bypass -File install.ps1 -Launcher multimc -Instance "6ix7even"
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Launcher official
 
 # Default params (overridable via CLI flags)
@@ -28,7 +28,7 @@ try {
 }
 
 # Modrinth's edge rejects the default PowerShell User-Agent.
-$script:HttpUserAgent = 'artlab-mc-installer/1.0 (+https://github.com/artlab-org/mc-modpack-client)'
+$script:HttpUserAgent = '6ix7even-mc-installer/1.0 (+https://github.com/artlab-org/6ix7even-modpack)'
 
 # When piped (irm | iex) PowerShell drops the param() block, so the CLI flags
 # are IGNORED. Env vars are the reliable way to pass them in that mode.
@@ -37,10 +37,10 @@ if ($env:MC_VERSION)  { $Version   = $env:MC_VERSION }
 if ($env:MC_DIR)      { $Dir      = $env:MC_DIR }
 if ($env:MC_INSTANCE) { $Instance = $env:MC_INSTANCE }
 $ErrorActionPreference = "Stop"
-$REPO_URL = "https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main"
+$REPO_URL = "https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main"
 
 Write-Host ""
-Write-Host "=== artlab MC modpack installer ===" -ForegroundColor Cyan
+Write-Host "=== 6ix7even MC modpack installer ===" -ForegroundColor Cyan
 Write-Host "Launcher: $Launcher | MC version: $Version | Clean: $Clean"
 if ($env:MC_LAUNCHER -or $env:MC_VERSION -or $env:MC_DIR -or $env:MC_INSTANCE) {
     Write-Host "(overrides applied from env vars)" -ForegroundColor DarkGray
@@ -396,7 +396,7 @@ if ($failed -eq 0) {
     Write-Host "6. Ajoute le serveur : mc.6ix7even.cc port 25565 (ou artlab:25565 via tailnet)"
     Write-Host "7. Tape /register <password> puis /login <password> en jeu"
     Write-Host ""
-    Write-Host "Si probleme : ouvre une issue sur https://github.com/artlab-org/mc-modpack-client/issues"
+    Write-Host "Si probleme : ouvre une issue sur https://github.com/artlab-org/6ix7even-modpack/issues"
 } else {
     Write-Host "=== Installation partielle ===" -ForegroundColor Yellow
     Write-Host "$failed mods ont echoue. Re-lance le script pour retry."

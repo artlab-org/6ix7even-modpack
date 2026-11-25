@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# artlab MC modpack uninstall (Linux/macOS)
+# 6ix7even MC modpack uninstall (Linux/macOS)
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/uninstall.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/uninstall.sh | bash
 #   curl -fsSL ... | bash -s -- --launcher sklauncher
 #   curl -fsSL ... | bash -s -- --dir /path/to/.minecraft
 
@@ -22,7 +22,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo "=== artlab MC modpack uninstall ==="
+echo "=== 6ix7even MC modpack uninstall ==="
 
 # Same launcher detection as install.sh (simplified inline)
 detect_sklauncher() {

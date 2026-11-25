@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# artlab MC modpack install script (Linux/macOS)
+# 6ix7even MC modpack install script (Linux/macOS)
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.sh | bash
 #   curl -fsSL ... | bash -s -- --launcher auto --clean
 #   curl -fsSL ... | bash -s -- --launcher sklauncher --version 26.3
-#   curl -fsSL ... | bash -s -- --launcher multimc --instance artlab
+#   curl -fsSL ... | bash -s -- --launcher multimc --instance 6ix7even
 #   curl -fsSL ... | bash -s -- --dir /path/to/.minecraft
 #
 # Launchers supported: auto | official | sklauncher | multimc | prism | custom
 
 set -euo pipefail
 
-REPO_URL="https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main"
+REPO_URL="https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main"
 MC_VERSION="${MC_VERSION:-26.3}"
 LAUNCHER="auto"
 CLEAN=0
@@ -38,7 +38,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo ""
-echo "=== artlab MC modpack installer ==="
+echo "=== 6ix7even MC modpack installer ==="
 echo "Launcher: $LAUNCHER | MC version: $MC_VERSION | Clean: $CLEAN"
 echo ""
 
@@ -363,7 +363,7 @@ if [[ "$failed" = "0" ]]; then
     echo "6. Ajoute le serveur : mc.6ix7even.cc port 25565 (ou artlab:25565 via tailnet)"
     echo "7. Tape /register <password> puis /login <password> en jeu"
     echo ""
-    echo "Si probleme : https://github.com/artlab-org/mc-modpack-client/issues"
+    echo "Si probleme : https://github.com/artlab-org/6ix7even-modpack/issues"
 else
     echo "=== Installation partielle ==="
     echo "$failed mods ont echoue. Re-lance le script pour retry."

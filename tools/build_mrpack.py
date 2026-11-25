@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generateur deterministe de pack Modrinth (.mrpack) pour le modpack client artlab.
+"""Generateur deterministe de pack Modrinth (.mrpack) pour le pack client 6ix7even.
 
 Source de verite : ``mods/manifest.json`` (mods figes, hashes et URLs).
 
@@ -20,7 +20,7 @@ launcher les telecharge via ``downloads[]``.
 Usage :
     python3 tools/build_mrpack.py                # -> dist/<slug>-<version>.mrpack
     python3 tools/build_mrpack.py --validate     # build + validation (code de sortie != 0 si ecart)
-    python3 tools/build_mrpack.py --slug artlab --name "Artlab" --summary "..."
+    python3 tools/build_mrpack.py --slug 6ix7even --name "6ix7even client" --summary "..."
 """
 
 from __future__ import annotations
@@ -36,14 +36,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MANIFEST = REPO_ROOT / "mods" / "manifest.json"
 DEFAULT_OUT_DIR = REPO_ROOT / "dist"
 
-# Slug du projet Modrinth : "artlab-client" (slug verifie libre le 2026-11-21 :
-# GET /v2/project/artlab-client -> 404 ; projet a creer a la publication).
+# Slug du projet Modrinth : "6ix7even" (renomme au rebrand du 2026-11-25 ;
+# id projet Y6UiohXZ et id organisation OaROVVjY inchanges).
 # Le slug ne sert qu'au NOM du fichier .mrpack : il n'entre pas dans
 # modrinth.index.json, le contenu du pack reste inchange.
-DEFAULT_SLUG = "artlab-client"
-DEFAULT_NAME = "Artlab client"
+DEFAULT_SLUG = "6ix7even"
+DEFAULT_NAME = "6ix7even client"
 DEFAULT_SUMMARY = (
-    "Modpack client artlab : Minecraft 26.3 (Fabric loader 0.19.5), "
+    "Pack client 6ix7even : Minecraft 26.3 (Fabric loader 0.19.5), "
     "13 mods optimises (rendu, performance, monde distant, voix). "
     "Pack genere localement depuis mods/manifest.json."
 )
@@ -171,7 +171,7 @@ def sha256_file(path: Path) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Genere le pack Modrinth (.mrpack) du modpack client artlab.")
+    parser = argparse.ArgumentParser(description="Genere le pack Modrinth (.mrpack) du pack client 6ix7even.")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST, help="manifeste des mods")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="dossier de sortie")
     parser.add_argument("--slug", default=DEFAULT_SLUG, help="slug du pack (nom de fichier)")

@@ -1,8 +1,8 @@
-# artlab MC modpack uninstall (Windows PowerShell)
+# 6ix7even MC modpack uninstall (Windows PowerShell)
 # Usage:
-#   irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/uninstall.ps1 | iex
+#   irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/uninstall.ps1 | iex
 #   powershell -ExecutionPolicy Bypass -File uninstall.ps1 -Launcher sklauncher
-#   powershell -ExecutionPolicy Bypass -File uninstall.ps1 -Launcher multimc -Instance artlab
+#   powershell -ExecutionPolicy Bypass -File uninstall.ps1 -Launcher multimc -Instance 6ix7even
 
 $ErrorActionPreference = "Stop"
 
@@ -13,7 +13,7 @@ param(
     [string]$Instance = ""
 )
 
-Write-Host "=== artlab MC modpack uninstall ===" -ForegroundColor Cyan
+Write-Host "=== 6ix7even MC modpack uninstall ===" -ForegroundColor Cyan
 Write-Host "Launcher: $Launcher | Dir: $Dir"
 
 $appdata = $env:APPDATA
