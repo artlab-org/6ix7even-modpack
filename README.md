@@ -1,6 +1,8 @@
-# mc-modpack-client — Modpack client artlab Minecraft (MC 26.3 Fabric)
+# Pack client 6ix7even — Minecraft (MC 26.3, Fabric)
 
-**Modpack Fabric facultatif pour le serveur artlab Minecraft (MC 26.3).**
+**Modpack Fabric facultatif pour le serveur 6ix7even Minecraft (MC 26.3).**
+
+Dépôt : [`artlab-org/6ix7even-modpack`](https://github.com/artlab-org/6ix7even-modpack) · Modrinth : [`6ix7even`](https://modrinth.com/modpack/6ix7even) · Site : <https://web.6ix7even.cc/modpack/>
 
 > ℹ️ **Ce modpack est facultatif pour rejoindre le serveur.**
 > Tu peux te connecter et jouer normalement sans le pack. Le pack apporte 4 améliorations :
@@ -50,7 +52,7 @@
 Ouvre PowerShell (touche Windows, tape `powershell`, Entrée), puis colle :
 
 ```powershell
-irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 | iex
 ```
 
 > **Windows PowerShell 5.1** (`powershell.exe`, le défaut sur Windows 10/11) peut
@@ -62,15 +64,15 @@ irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.
 
 ```powershell
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 | iex
 ```
 
 > Si même ça échoue (TLS bloqué au niveau OS / proxy d'entreprise), utilise
 > `curl.exe` (intégré à Windows 10 1803+) puis PowerShell :
 
 ```powershell
-curl.exe -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 -o "$env:TEMP\rtlab-mc-install.ps1"
-powershell -ExecutionPolicy Bypass -File "$env:TEMP\rtlab-mc-install.ps1"
+curl.exe -fsSL https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 -o "$env:TEMP\6ix7even-mc-install.ps1"
+powershell -ExecutionPolicy Bypass -File "$env:TEMP\6ix7even-mc-install.ps1"
 ```
 
 > **Le `| iex` ignore les paramètres** (`-Launcher`, `-Version`, `-Clean`) :
@@ -79,7 +81,7 @@ powershell -ExecutionPolicy Bypass -File "$env:TEMP\rtlab-mc-install.ps1"
 > (voir ci-dessus), ou passe par les variables d'environnement :
 
 ```powershell
-$env:MC_LAUNCHER = "sklauncher"; irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 | iex
+$env:MC_LAUNCHER = "sklauncher"; irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 | iex
 ```
 
 Le script :
@@ -91,7 +93,7 @@ Le script :
 ### Linux / macOS
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.sh | bash
 ```
 
 > Le script supporte `--dir <path>` pour cibler un dossier `.minecraft` custom (MultiMC/Prism).
@@ -100,10 +102,10 @@ curl -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/i
 
 ```bash
 # Windows
-irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/uninstall.ps1 | iex
+irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/uninstall.ps1 | iex
 
 # Linux / macOS
-bash <(curl -fsSL https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/uninstall.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/uninstall.sh)
 ```
 
 ---
@@ -184,7 +186,7 @@ try {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 }
 # - User-Agent explicite (l'edge Modrinth rejette le User-Agent PowerShell par défaut)
-$ua = 'artlab-mc-installer/1.0 (+https://github.com/artlab-org/mc-modpack-client)'
+$ua = '6ix7even-mc-installer/1.0 (+https://github.com/artlab-org/6ix7even-modpack)'
 
 $mods = @(
   @{ slug = "fabric-api"; version = "0.163.0+26.3" },
@@ -236,24 +238,32 @@ foreach ($mod in $mods) {
 
 ## Pack Modrinth (.mrpack)
 
-Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`, et il est **publié sur Modrinth** depuis le 22 novembre 2026 : projet [`artlab-client`](https://modrinth.com/modpack/artlab-client) (organisation **Artlab**, type `modpack`), version **1.0.0** (Minecraft 26.3, Fabric). Le même fichier est aussi en pièce jointe de la [release GitHub](https://github.com/artlab-org/mc-modpack-client/releases).
+Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depuis le **rebrand du 25 novembre 2026**, le slug du projet Modrinth est [`6ix7even`](https://modrinth.com/modpack/6ix7even) (id projet `Y6UiohXZ`, id organisation `OaROVVjY` — **inchangés**), type `modpack`, version **1.0.0** (Minecraft 26.3, Fabric). Le build **local** produit désormais `dist/6ix7even-1.0.0.mrpack`.
+
+> ⚠️ **Artefact DÉJÀ PUBLIÉ : son nom ne change pas.**
+> La version Modrinth **1.0.0** (id `MkI0FmNB`) et les releases GitHub [`modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) / [`mrpack-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.0.0) **n'ont pas été republiés** : le fichier publié s'appelle toujours `artlab-client-1.0.0.mrpack` (2 597 o, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3`).
+> **Aucun fichier `6ix7even-1.0.0.mrpack` n'est publié à ce jour** : ce nom désigne **uniquement le build local** produit par `tools/build_mrpack.py`. *Renommage au rebrand du 25 novembre 2026 — republication non faite.*
 
 ```bash
-# Génère dist/artlab-client-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
+# Génère dist/6ix7even-1.0.0.mrpack — ZIP déterministe (même SHA-256 à chaque exécution)
 python3 tools/build_mrpack.py
 
 # Point d'entrée unique : génère PUIS valide (code de sortie ≠ 0 si un écart est détecté)
 python3 tools/build_mrpack.py --validate
 
 # Valider un pack déjà construit
-python3 tools/validate_mrpack.py dist/artlab-client-1.0.0.mrpack
+python3 tools/validate_mrpack.py dist/6ix7even-1.0.0.mrpack
 ```
 
 Pré-requis : **Python 3.9+**, bibliothèque standard uniquement (`zipfile`) — aucune dépendance externe.
 
-Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256** — mesuré le 21 novembre 2026 sur le `mods/manifest.json` actuel :
+Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvier 1980, ordre des entrées stable, attributs UNIX forcés. Deux exécutions successives donnent donc le **même SHA-256**. Après le rebrand du 25 novembre 2026, **deux empreintes coexistent** : celle du build local renommé et celle de l'artefact déjà publié.
 
 ```text
+# build LOCAL renommé (slug 6ix7even) — mesuré le 25 novembre 2026 sur le mods/manifest.json actuel
+9aa3b8ebda7b58f5a32eadbfd83380938eb8eb80ad72b7e0d227d7c113663345  6ix7even-1.0.0.mrpack
+
+# artefact DÉJÀ PUBLIÉ (nom d'origine inchangé) — version Modrinth 1.0.0 + releases GitHub
 0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3  artlab-client-1.0.0.mrpack
 ```
 
@@ -263,12 +273,12 @@ Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth
 
 `tools/validate_mrpack.py` recalcule SHA-1, SHA-512 et la taille de chaque `.jar` depuis les fichiers réels, les compare à l'index, contrôle les dépendances, vérifie qu'il y a une entrée par mod du manifeste et que chaque URL suit la forme `https://cdn.modrinth.com/data/<project_id>/versions/<version_id>/<fichier>`, et sort en code 1 au moindre écart. Un contrôle supplémentaire de l'API Modrinth (`GET /v2/version/<version_id>`, sha512 et taille distants) est disponible via `--online` ; sans ce drapeau, la validation reste **hors ligne et déterministe**.
 
-**Installation** : importer `dist/artlab-client-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack. Une fois la modération Modrinth validée, la [page du projet](https://modrinth.com/modpack/artlab-client) permettra en plus l'installation en un clic depuis le launcher.
+**Installation** : importer `dist/6ix7even-1.0.0.mrpack` dans le launcher Modrinth (« Import pack »), ou dans tout launcher compatible `.mrpack` — le launcher installe Minecraft 26.3 + Fabric Loader 0.19.5 et les 13 mods du pack. Une fois la modération Modrinth validée, la [page du projet](https://modrinth.com/modpack/6ix7even) permettra en plus l'installation en un clic depuis le launcher.
 
 | Launcher | Import `.mrpack` | Comment faire |
 |---|---|---|
-| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/artlab-client-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
-| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/artlab-client-1.0.0.mrpack` |
+| **Modrinth App** (Windows / Linux / macOS) | ✅ | Lance l'app → onglet **Modpacks** → **Import pack** → choisis `dist/6ix7even-1.0.0.mrpack` (les libellés du menu varient selon la version de l'app) |
+| **Prism Launcher** / **MultiMC** | ✅ | **Add profile** / **New instance** → **Import from file** → `dist/6ix7even-1.0.0.mrpack` |
 | **Minecraft Launcher officiel** (Microsoft) | ❌ | Le launcher officiel sait utiliser un **profil Fabric** (voir [Compatibilité launcher](#compatibilité-launcher)) mais **n'importe pas** de `.mrpack` : utilise le Modrinth App, ou l'[installation manuelle](#installation-manuelle) des 13 `.jar` |
 | **TLauncher** / **SKLauncher** | ⚠️ non couvert | Leur gestion des mods est **propriétaire** et hors du périmètre de ce pack : pour rester aligné sur le pack, utilise le **Modrinth App** ou l'installation manuelle des 13 `.jar` |
 
@@ -278,7 +288,7 @@ Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth
 
 ```bash
 # Le .mrpack est un ZIP : l'index se lit sans installer le pack
-unzip -p dist/artlab-client-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
+unzip -p dist/6ix7even-1.0.0.mrpack modrinth.index.json | python3 -m json.tool
 ```
 
 > Le dossier `dist/` est ignoré par Git (`.gitignore`) : le `.mrpack` n'est **pas versionné**. Il est produit à la demande par la commande ci-dessus, ou fourni en pièce jointe par le canal de distribution du projet.
@@ -303,18 +313,19 @@ Dans l'index, chaque mod est marqué `env: {client: required, server: unsupporte
 
 ### Page Modrinth du pack
 
-**Page Modrinth du pack : <https://modrinth.com/modpack/artlab-client>**
+**Page Modrinth du pack : <https://modrinth.com/modpack/6ix7even>**
 
-Projet Modrinth `artlab-client` (id `Y6UiohXZ`), publié sous l'**organisation Artlab** (`OaROVVjY`), type `modpack`, licence MIT, Minecraft **26.3**, chargeur **Fabric** (`client_side: required`, `server_side: unsupported`).
+Projet Modrinth `6ix7even` (id `Y6UiohXZ`), publié sous l'**organisation** id `OaROVVjY` (**inchangé** depuis la publication), type `modpack`, licence MIT, Minecraft **26.3**, chargeur **Fabric** (`client_side: required`, `server_side: unsupported`).
 
-La version **1.0.0** (id `MkI0FmNB`, `release`) y est publiée avec le fichier `artlab-client-1.0.0.mrpack` (**2 597 o**, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3` — identique à la release GitHub). Le projet est **soumis à la modération Modrinth** (`status: processing`) : tant que la validation n'est pas faite, la page affiche « Project not found » et le projet n'apparaît pas encore dans les listes. D'ici là, le `.mrpack` reste téléchargeable depuis la [release GitHub `mrpack-v1.0.0`](https://github.com/artlab-org/mc-modpack-client/releases/tag/mrpack-v1.0.0).
+La version **1.0.0** (id `MkI0FmNB`, `release`) y est publiée avec le fichier `artlab-client-1.0.0.mrpack` (**2 597 o**, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3` — identique à la release GitHub) : **le nom du fichier publié n'a pas changé** au rebrand du 25 novembre 2026, la republication n'a pas été faite. Le projet est **soumis à la modération Modrinth** (`status: processing`) : tant que la validation n'est pas faite, la page affiche « Project not found » et le projet n'apparaît pas encore dans les listes. D'ici là, le `.mrpack` reste téléchargeable depuis la [release GitHub `modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) — sous son nom d'origine, `artlab-client-1.0.0.mrpack`.
 
 ---
 
 ## Accès au serveur
 
-- **Tailnet** : `artlab:25565` (100.70.152.40:25565) — pour les accès internes
+- **Tailnet** : `artlab:25565` (100.70.152.40:25565) — pour les accès internes (`artlab` est le **nom d'hôte tailnet de la machine**, pas la marque du pack)
 - **Public** : `mc.6ix7even.cc:25565` (A public → `195.201.220.239`)
+- **Site du pack** : <https://web.6ix7even.cc/modpack/>
 
 ### Première connexion
 
@@ -355,7 +366,7 @@ Le modpack installe **Plasmo Voice 2.1.17** (`plasmovoice-fabric-26.3-2.1.17.jar
 
 ### Réseau : le même port que le jeu
 
-Le serveur Artlab utilise **le port 25565 pour les deux** — même adresse, même port, protocole différent :
+Le serveur 6ix7even utilise **le port 25565 pour les deux** — même adresse, même port, protocole différent :
 
 | Flux | Protocole | Port |
 |---|---|---|
@@ -493,7 +504,7 @@ net.fabricmc.loader.impl.FormattedException: Some of your mods are incompatible 
 **Fix** : réinstalle mon modpack avec `-Clean` (ça wipe les mods 26.1) :
 
 ```powershell
-irm https://raw.githubusercontent.com/artlab-org/mc-modpack-client/main/install.ps1 | iex -args @{Launcher='sklauncher'; Clean=$true}
+irm https://raw.githubusercontent.com/artlab-org/6ix7even-modpack/main/install.ps1 | iex -args @{Launcher='sklauncher'; Clean=$true}
 ```
 
 OU manuellement :

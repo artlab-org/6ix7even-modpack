@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validateur de pack Modrinth (.mrpack) pour le modpack client artlab.
+"""Validateur de pack Modrinth (.mrpack) pour le pack client 6ix7even.
 
 Controles :
   * archive ZIP lisible, ``modrinth.index.json`` present a la racine ;
@@ -18,7 +18,7 @@ Controles :
 Code de sortie : 0 si tout est conforme, 1 sinon.
 
 Usage :
-    python3 tools/validate_mrpack.py dist/artlab-client-1.0.0.mrpack
+    python3 tools/validate_mrpack.py dist/6ix7even-1.0.0.mrpack
     python3 tools/validate_mrpack.py                 # auto-detecte le pack de dist/
     python3 tools/validate_mrpack.py --online         # + controle de l'API Modrinth
 """
@@ -104,7 +104,7 @@ def fetch(url: str, cache_dir: Path, filename: str) -> Path:
     cache_dir.mkdir(parents=True, exist_ok=True)
     target = cache_dir / filename
     if not target.exists() or target.stat().st_size == 0:
-        request = urllib.request.Request(url, headers={"User-Agent": "artlab-mrpack-validator/1.0"})
+        request = urllib.request.Request(url, headers={"User-Agent": "6ix7even-mrpack-validator/1.0"})
         with urllib.request.urlopen(request, timeout=60) as response:
             target.write_bytes(response.read())
     return target
@@ -112,7 +112,7 @@ def fetch(url: str, cache_dir: Path, filename: str) -> Path:
 
 def fetch_json(url: str) -> dict:
     """Recupere un document JSON public (API Modrinth)."""
-    request = urllib.request.Request(url, headers={"User-Agent": "artlab-mrpack-validator/1.0"})
+    request = urllib.request.Request(url, headers={"User-Agent": "6ix7even-mrpack-validator/1.0"})
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.loads(response.read().decode("utf-8"))
 
