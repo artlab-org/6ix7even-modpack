@@ -41,7 +41,7 @@ Dépôt : [`artlab-org/6ix7even-modpack`](https://github.com/artlab-org/6ix7even
   - **TLauncher** (crack)
   - **SKLauncher** (crack)
   - **MultiMC / Prism Launcher** (open-source)
-- ~1 Go d'espace disque (24 mods = ~74 Mio, + ~147 Mio de resource packs et ~5 Mio de shader packs)
+- ~1 Go d'espace disque (24 mods = ~74 Mio, + ~18 Mio de resource packs et ~5 Mio de shader packs)
 - 4 GB RAM alloués au jeu (recommandé 6 GB pour Distant Horizons)
 
 ---
@@ -256,10 +256,10 @@ Le pack `.mrpack` est **généré localement** depuis `mods/manifest.json`. Depu
 
 > ⚠️ **La version 1.0.0 reste intacte.**
 > La version Modrinth **1.0.0** (id `MkI0FmNB`) et les releases GitHub [`modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) / [`mrpack-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.0.0) **n'ont pas été republiés** : le fichier publié s'appelle toujours `artlab-client-1.0.0.mrpack` (2 597 o, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3`).
-> La **1.1.0** est une **nouvelle version** : elle passe de 13 à **24 mods** et ajoute les **13 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** de l'instance de référence. Le fichier de la 1.1.0 s'appelle `6ix7even-1.1.0.mrpack`.
+> La **1.1.0** est une **nouvelle version** : elle passe de 13 à **24 mods** et ajoute les **7 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** de l'instance de référence. Le fichier de la 1.1.0 s'appelle `6ix7even-1.1.0.mrpack`.
 
 > 📦 **Publication de la 1.1.0 (25 novembre 2026)**
-> - **Release GitHub [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0)** — asset `6ix7even-1.1.0.mrpack`, **142 977 167 o**, SHA-256 `552ff3d37275c8b7e321cc3629a73ffc4d134ec8b365b32061df05ddbc1e2306` (identique au build local). Téléchargement : <https://github.com/artlab-org/6ix7even-modpack/releases/download/mrpack-v1.1.0/6ix7even-1.1.0.mrpack>
+> - **Release GitHub [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0)** — asset `6ix7even-1.1.0.mrpack`, **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb` (identique au build local). Téléchargement : <https://github.com/artlab-org/6ix7even-modpack/releases/download/mrpack-v1.1.0/6ix7even-1.1.0.mrpack>
 > - **Version Modrinth 1.1.0** : **pas encore publiée** — le jeton d'API Modrinth disponible dans Vault est refusé par l'API (`401 invalid_credentials` sur `POST /v3/version`). Un jeton renouvelé est nécessaire pour créer la version ; **la 1.0.0 n'est pas modifiée** d'ici là.
 
 ```bash
@@ -282,7 +282,7 @@ Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvie
 
 ```text
 # build 1.1.0 (actuel) — mesuré sur le mods/manifest.json v1.1.0
-552ff3d37275c8b7e321cc3629a73ffc4d134ec8b365b32061df05ddbc1e2306  6ix7even-1.1.0.mrpack
+e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb  6ix7even-1.1.0.mrpack
 
 # build 1.0.0 (référence antérieure, local)
 9aa3b8ebda7b58f5a32eadbfd83380938eb8eb80ad72b7e0d227d7c113663345  6ix7even-1.0.0.mrpack
@@ -295,12 +295,12 @@ Le `.mrpack` produit est **déterministe** : timestamps ZIP figés au 1er janvie
 
 Le pack contient `modrinth.index.json` à la racine, au [format de pack Modrinth](https://github.com/modrinth/code/blob/main/apps/labrinth/src/models/v3/pack.rs) : `formatVersion` 1, `game` `minecraft`, `versionId` `1.1.0`, `name`, `summary`, `dependencies` (`minecraft` 26.3 + `fabric-loader` 0.19.5) et **24 entrées** `files[]` (`path`, `hashes` sha1/sha512, `env`, `downloads`, `fileSize`).
 
-Le dossier `overrides/` est présent et contient **45 fichiers** :
+Le dossier `overrides/` est présent et contient **39 fichiers** :
 
 | Dossier | Contenu | Nombre |
 |---|---|---:|
 | `overrides/config/` | configurations des mods (Distant Horizons, Iris, Sodium, Lithium, Plasmo Voice, Mod Menu, YACL, …) | 27 fichiers |
-| `overrides/resourcepacks/` | resource packs de l'instance de référence | 13 fichiers |
+| `overrides/resourcepacks/` | resource packs de l'instance de référence | 7 fichiers |
 | `overrides/shaderpacks/` | shader packs de l'instance de référence | 4 packs (+ 1 `.txt`) |
 
 Les `.jar` ne sont **pas** embarqués : le launcher les télécharge depuis `cdn.modrinth.com` et vérifie les empreintes.
@@ -333,23 +333,19 @@ unzip -p dist/6ix7even-1.1.0.mrpack modrinth.index.json | python3 -m json.tool
 
 Depuis la **1.1.0**, le `.mrpack` embarque le contenu visuel et la configuration de l'instance de référence (profil AstralRinth `artlab-client-1.0.0`).
 
-### Resource packs (13)
+### Resource packs (7)
 
 | Fichier | Taille |
 |---|---:|
-| `Better-Leaves-9.6.zip` | 1 977 146 octets |
-| `Default HD 128x Demo 1.8.2.7.zip` | 16 876 419 octets |
 | `Default-Dark-Mode-26.3-2026.9.0.zip` | 761 869 octets |
 | `Dramatic Skys Demo 1.5.3.36.6.zip` | 13 912 171 octets |
-| `Enhanced Audio r7.zip` | 18 977 120 octets |
 | `FA+All_Extensions-v1.10.1.zip` | 548 952 octets |
 | `FA+Player-v1.1.zip` | 110 203 octets |
-| `Faithful 64x - Release 15.zip` | 19 411 638 octets |
 | `Fresh Food.zip` | 1 396 587 octets |
 | `FreshAnimations_v1.11.2_26.1+.zip` | 778 725 octets |
-| `Patrix_26.3_32x_basic.zip` | 76 017 425 octets |
-| `Recolourful Containers 3.1.4 (1.19.4+).zip` | 2 011 177 octets |
 | `§a§lVocal Villagers §r§71.5.zip` | 1 148 267 octets |
+
+> 6 resource packs présents dans l'instance ne sont **pas** embarqués (choix d'Arthur) : `Better-Leaves-9.6.zip`, `Default HD 128x Demo 1.8.2.7.zip`, `Enhanced Audio r7.zip`, `Faithful 64x - Release 15.zip`, `Patrix_26.3_32x_basic.zip`, `Recolourful Containers 3.1.4 (1.19.4+).zip`.
 
 ### Shader packs (4)
 
@@ -374,7 +370,7 @@ Les réglages **spécifiques à une machine** (empreinte Sodium, cache Plasmo Vo
 
 Ce pack est **client-only** : il n'installe que ce qui tourne **chez le joueur**.
 
-- **Installé par le pack** : Minecraft 26.3, Fabric Loader 0.19.5, les **24 mods client** (Fabric API, Sodium, Iris, Lithium, FerriteCore, Krypton, Mod Menu, Cloth Config, Distant Horizons, Fabric Language Kotlin, ViaFabric, Chunky, Plasmo Voice, Continuity, Controlify, Better Autoclicker, Chat Heads, Entity Model Features, Entity Texture Features, Particle Rain, 3D Skin Layers, Sound Physics Remastered, Visuality, YetAnotherConfigLib), les **13 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** (voir [Ressources, shaders et configs embarqués](#ressources-shaders-et-configs-embarqués)).
+- **Installé par le pack** : Minecraft 26.3, Fabric Loader 0.19.5, les **24 mods client** (Fabric API, Sodium, Iris, Lithium, FerriteCore, Krypton, Mod Menu, Cloth Config, Distant Horizons, Fabric Language Kotlin, ViaFabric, Chunky, Plasmo Voice, Continuity, Controlify, Better Autoclicker, Chat Heads, Entity Model Features, Entity Texture Features, Particle Rain, 3D Skin Layers, Sound Physics Remastered, Visuality, YetAnotherConfigLib), les **7 resource packs**, les **4 shader packs** et les **27 fichiers de configuration** (voir [Ressources, shaders et configs embarqués](#ressources-shaders-et-configs-embarqués)).
 - **Non installé par le pack** : la **configuration serveur** — `server.properties`, la liste des joueurs, la whitelist et les données du monde ne sont **pas** dans le `.mrpack`. Le dossier `overrides/` ne contient que du **contenu client** (configs, resource packs, shader packs) : **le pack ne contient aucun réglage serveur**.
 - **Mods côté serveur** : EasyAuth et Vanish tournent **sur le serveur**, pas dans le pack client (voir [Compatibilité serveur](#compatibilité-serveur)).
 
@@ -396,7 +392,7 @@ Projet Modrinth `6ix7even` (id `Y6UiohXZ`), publié sous l'**organisation** id `
 
 La version **1.0.0** (id `MkI0FmNB`, `release`) y est publiée avec le fichier `artlab-client-1.0.0.mrpack` (**2 597 o**, SHA-256 `0ca18926fd2ca239ec0e5843707954a202bc68de5edb0875822bd83d0cafa1f3` — identique à la release GitHub) : **le nom du fichier publié n'a pas changé** au rebrand du 25 novembre 2026, la republication n'a pas été faite. Le projet est **soumis à la modération Modrinth** (`status: processing`) : tant que la validation n'est pas faite, la page affiche « Project not found » et le projet n'apparaît pas encore dans les listes. D'ici là, le `.mrpack` reste téléchargeable depuis la [release GitHub `modrinth-v1.0.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/modrinth-v1.0.0) — sous son nom d'origine, `artlab-client-1.0.0.mrpack`.
 
-La version **1.1.0** est, elle, **publiée sur GitHub** : release [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0), asset `6ix7even-1.1.0.mrpack`, **142 977 167 o**, SHA-256 `552ff3d37275c8b7e321cc3629a73ffc4d134ec8b365b32061df05ddbc1e2306` — le même fichier que le build local. Sa **publication sur Modrinth est en attente** (jeton d'API à renouveler) : la page ci-dessus ne l'expose pas encore.
+La version **1.1.0** est, elle, **publiée sur GitHub** : release [`mrpack-v1.1.0`](https://github.com/artlab-org/6ix7even-modpack/releases/tag/mrpack-v1.1.0), asset `6ix7even-1.1.0.mrpack`, **22 575 641 o**, SHA-256 `e91e72af53774505e1cbb253185f2d36f2816ad80fdb0ff48ca66cd8a33604cb` — le même fichier que le build local. Sa **publication sur Modrinth est en attente** (jeton d'API à renouveler) : la page ci-dessus ne l'expose pas encore.
 
 ---
 
